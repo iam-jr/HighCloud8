@@ -13,6 +13,7 @@ main#formulario-proyecto {
   background: #ffffff;
   border-radius: 20px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+  margin-top: 100px;
 }
 
 h1 {
@@ -116,5 +117,10 @@ button[type="submit"]:hover {
 
   button[type="submit"] {
     width: 100%;
+  }
+}
+@media (max-width: 768px) {
+  main#formulario-proyecto {
+    margin-top: 100px; /* o lo que sea necesario en móvil */
   }
 }
