@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formulario de Proyecto | High Cloud 8</title>
+
+  <!-- Estilo global -->
+  <link rel="stylesheet" href="../css/styles.css" />
+
+  <!-- Boxicons -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+
+  <!-- JS -->
+  <script defer src="../js/script.js"></script>
+</head>
+<body>
+
+  <!-- Header con logo y navegación -->
+  <header class="header">
+    <a href="../index.html" class="logo">
+      <img src="../img/highcloud8.png" alt="High Cloud 8 Logo" class="logo-img" />
+    </a>
+    <nav class="navbar">
+      <a href="../index.html" class="nav-link">Home</a>
+      <a href="../index.html#about" class="nav-link">About</a>
+      <a href="../index.html#services" class="nav-link">Services</a>
+      <a href="../index.html#team" class="nav-link">Our Team</a>
+      <a href="../index.html#testimonials" class="nav-link">Testimonials</a>
+      <a href="../index.html#contact" class="nav-link">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Formulario principal -->
+  <form action="send_formulario.php" method="POST">
+  <main id="formulario-proyecto">
+    <form id="clienteForm" enctype="multipart/form-data">
+      <h1>Cuéntanos tu visión de diseño</h1>
+      <p>Este formulario es tu espacio para expresar cómo deseas que se vea y funcione tu página web. Mientras más detalles nos brindes, mejor podremos traducir tu visión en un diseño profesional, moderno y atractivo.</p>
+
+      <section>
+        <h2>1. Identidad de tu marca</h2>
+        <label>Nombre de tu pagina web:
+          <input type="text" name="nombre_proyecto" required>
+        </label>
+
+        <label>Describe tu marca o lo que deseas reflejar con tu diseño:
+          <textarea name="descripcion_negocio" required></textarea>
+        </label>
+
+        <label>¿Cuál es tu público ideal o clientes deseados?
+          <input type="text" name="publico_objetivo">
+        </label>
+
+        <label>¿Tienes un lema o mensaje clave que deseas incluir visualmente?
+          <input type="text" name="lema">
+        </label>
+      </section>
+
+      <section>
+        <h2>2. Selección de estilo visual</h2>
+        <p>Selecciona el diseño que mejor represente tu marca. Cada opción incluye una imagen de referencia:</p>
+        <div class="template-selector">
+          <label>
+            <input type="radio" name="template" value="moderno">
+            <img src="../img/modernoyminimalista.png" alt="Moderno y minimalista">
+            <span>Moderno y minimalista<br><small>Ideal para marcas limpias, elegantes y con enfoque visual claro.</small></span>
+          </label>
+
+          <label>
+            <input type="radio" name="template" value="corporativo">
+            <img src="../img/corporativoyprofesional.png" alt="Corporativo y profesional">
+            <span>Corporativo y profesional<br><small>Perfecto para empresas que buscan transmitir seriedad y confianza.</small></span>
+          </label>
+
+          <label>
+            <input type="radio" name="template" value="creativo">
+            <img src="../img/creativo.png" alt="Creativo y colorido">
+            <span>Creativo y colorido<br><small>Colores vibrantes y estructuras llamativas para destacar visualmente.</small></span>
+          </label>
+
+          <label>
+            <input type="radio" name="template" value="elegante">
+            <img src="../img/eleganteypremium.png" alt="Elegante y premium">
+            <span>Elegante y premium<br><small>Diseño sofisticado, ideal para marcas de lujo o exclusivas.</small></span>
+          </label>
+
+          <label>
+            <input type="radio" name="template" value="oscuro">
+            <img src="../img/oscuroysofisticado.png" alt="Oscuro y sofisticado">
+            <span>Oscuro y sofisticado<br><small>Diseños impactantes con fondo negro o metálico. Perfecto para tech o moda.</small></span>
+          </label>
+        </div>
+      </section>
+
+      <section>
+        <h2>3. Colores y recursos</h2>
+        <label>¿Qué colores deseas que usemos en el diseño?
+          <input type="text" name="colores" placeholder="Ej: negro, dorado, blanco">
+        </label>
+
+        <label>¿Tienes un logo?
+          <select name="tiene_logo" id="tiene_logo" onchange="toggleLogoUpload()">
+            <option value="si">Sí</option>
+            <option value="no">No, necesito uno</option>
+          </select>
+        </label>
+        <div id="logoUpload">
+          <label>Sube tu logo:</label>
+          <input type="file" name="logo" id="logoInput" accept="image/*" onchange="previewLogo(event)">
+          <div id="logoPreview" class="file-preview"></div>
+
+        <label>Comparte links o ejemplos de páginas que te gusten visualmente:
+          <textarea name="referencias_visuales"></textarea>
+        </label>
+      </section>
+
+      <section>
+        <h2>4. Secciones que deseas incluir</h2>
+        <label>Selecciona las secciones que deseas tener en tu web:</label>
+        <div>
+          <input type="checkbox" name="secciones[]" value="inicio"> Inicio<br>
+          <input type="checkbox" name="secciones[]" value="nosotros"> Sobre Nosotros<br>
+          <input type="checkbox" name="secciones[]" value="servicios"> Servicios<br>
+          <input type="checkbox" name="secciones[]" value="productos"> Productos<br>
+          <input type="checkbox" name="secciones[]" value="contacto"> Contacto<br>
+          <input type="checkbox" name="secciones[]" value="testimonios"> Testimonios<br>
+          <input type="checkbox" name="secciones[]" value="galeria"> Galería o Portafolio<br>
+          <input type="checkbox" name="secciones[]" value="blog"> Blog o Noticias<br>
+          <input type="checkbox" name="secciones[]" value="faq"> Preguntas Frecuentes<br>
+        </div>
+      </section>
+
+      <section>
+        <h2>5. Contenido</h2>
+        <label>¿Tienes ya el contenido preparado para cada sección?
+          <select name="contenido_estado" id="contenido_estado" onchange="toggleContentUpload()">
+            <option value="si" selected>Sí</option>
+            <option value="parcial">Parcial</option>
+            <option value="no">No, necesito ayuda</option>
+          </select>
+          
+        </label>
+        <div id="archivosUpload" style="display: none">
+          <label>Adjunta todo el contenido relevante (textos, imágenes, PDFs):
+            <input type="file" name="archivos[]" multiple accept="image/*,.pdf,.doc,.docx">
+          </label>
+        </div>
+      </section>
+
+      <section>
+        <h2>6. Funcionalidades específicas</h2>
+        <label>Selecciona todas las funcionalidades que deseas integrar:</label>
+        <div>
+          <input type="checkbox" name="funcionalidades[]" value="carrito"> Carrito de compras<br>
+          <input type="checkbox" name="funcionalidades[]" value="pasarela_pago"> Pasarela de pago (ATH Móvil, PayPal, tarjeta)<br>
+          <input type="checkbox" name="funcionalidades[]" value="registro_usuarios"> Registro e inicio de sesión de usuarios<br>
+          <input type="checkbox" name="funcionalidades[]" value="buscador"> Buscador interno<br>
+          <input type="checkbox" name="funcionalidades[]" value="filtro_productos"> Filtros o categorías por producto/servicio<br>
+          <input type="checkbox" name="funcionalidades[]" value="blog" onchange="toggleBlogOptions(this)"> Publicaciones de blog<br>
+          <div id="blogOptions" style="display:none; padding-left: 1rem;">
+            <label>¿Cuántos artículos iniciales deseas publicar?
+              <input type="number" name="blog_cantidad" min="1">
+            </label>
+            <label>¿Deseas que tenga comentarios?
+              <select name="blog_comentarios">
+                <option value="si">Sí</option>
+                <option value="no">No</option>
+              </select>
+            </label>
+          </div>
+          <input type="checkbox" name="funcionalidades[]" value="portafolio"> Portafolio de trabajos o proyectos<br>
+          <input type="checkbox" name="funcionalidades[]" value="testimonios"> Módulo de testimonios<br>
+          <input type="checkbox" name="funcionalidades[]" value="multilenguaje"> Página en varios idiomas<br>
+          <input type="checkbox" name="funcionalidades[]" value="newsletter"> Suscripción a newsletter<br>
+          <input type="checkbox" name="funcionalidades[]" value="agenda"> Agenda o reserva de citas<br>
+          <input type="checkbox" name="funcionalidades[]" value="chat"> Chat en vivo o contacto rápido<br>
+        </div>
+      </section>
+
+      <section>
+        <h2>7. Experiencia visual y estilo</h2>
+        <label>¿Qué emociones deseas transmitir a tus visitantes?</label>
+        <div>
+          <input type="checkbox" name="emociones[]" value="confianza"> Confianza<br>
+          <input type="checkbox" name="emociones[]" value="creatividad"> Creatividad<br>
+          <input type="checkbox" name="emociones[]" value="lujo"> Lujo o exclusividad<br>
+          <input type="checkbox" name="emociones[]" value="energia"> Energía / dinamismo<br>
+          <input type="checkbox" name="emociones[]" value="seriedad"> Profesionalismo y seriedad<br>
+          <input type="checkbox" name="emociones[]" value="minimalismo"> Minimalismo<br>
+          <input type="checkbox" name="emociones[]" value="diversion"> Diversión y juventud<br>
+        </div>
+      </section>
+
+
+        <div id="archivosUpload">
+          <label>Adjunta todo el contenido relevante (textos, imágenes, PDFs):
+            <input type="file" name="archivos[]" multiple accept="image/*,.pdf,.doc,.docx">
+          </label>
+        </div>
+      </section>
+
+
+      <a href="gracias.html" class="btn btn-primary">Enviar Formulario</a>
+    </form>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container text-center">
+      <p>&copy; 2025 High Cloud 8. All rights reserved.</p>
+      <p>
+        Follow us on 
+        <a href="https://instagram.com/highcloud8" target="_blank" class="social-link">
+          <i class='bx bxl-instagram'></i>
+        </a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </script>
+</body>
+</html>
