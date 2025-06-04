@@ -125,3 +125,8 @@ button[type="submit"]:hover {
     margin-top: 100px; /* o lo que sea necesario en móvil */
   }
 }
+@media (max-width: 481px) {
+  main#formulario-proyecto {
+    margin-top: 100px; /* o lo que sea necesario en móvil */
+  }
+}
