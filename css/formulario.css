@@ -119,14 +119,3 @@ button[type="submit"]:hover {
     width: 100%;
   }
 }
-
-@media (max-width: 768px) {
-  main#formulario-proyecto {
-    margin-top: 100px; /* o lo que sea necesario en móvil */
-  }
-}
-@media (max-width: 481px) {
-  main#formulario-proyecto {
-    margin-top: 100px; /* o lo que sea necesario en móvil */
-  }
-}
