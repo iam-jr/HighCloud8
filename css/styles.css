@@ -766,3 +766,18 @@ main#formulario-proyecto {
     display: none;
   }
 }
+/* Safari iOS (iPhone, iPad) */
+@supports (-webkit-touch-callout: none) and (not (translate: none)) {
+  /* Aquí van estilos específicos para iOS Safari */
+}
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 812px) 
+  and (-webkit-min-device-pixel-ratio: 2) 
+  and (orientation: portrait) {
+  /* Estilos para iPhone X/11/12/13 en modo retrato */
+}
+@media only screen and (min-device-width: 320px) and (max-device-width: 900px) and (-webkit-device-pixel-ratio: 2), 
+       only screen and (min-device-width: 320px) and (max-device-width: 900px) and (device-pixel-ratio: 2) {
+  /* Estilos para móviles Android en general */
+}
