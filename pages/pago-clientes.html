@@ -15,7 +15,7 @@
   height: 100%;
   display:flex;
   justify-content: center;
-  margin-top: 300px;
+  margin-top: 600px;
   align-items: center;
   text-align: center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -175,12 +175,10 @@ nav.navbar {
 
     <img src="../img/HighCloud8Prices.png" alt="Precios de High Cloud 8" class="pricing-img" />
 
-    <!-- 1. Depósito inicial con Hosted Button -->
-<section aria-labelledby="deposito-title">
-  <h3 id="deposito-title">1. Depósito inicial ($299)</h3>
-  <div id="paypal-container-CEZNRR834PVZ4"></div>
-</section>
-
+    <section aria-labelledby="deposito-title">
+      <h3 id="deposito-title">1. Depósito inicial ($199)</h3>
+      <div id="paypal-deposito"></div>
+    </section>
 
     <section aria-labelledby="suscripcion-title" class="suscripcion-section">
       <h3 id="suscripcion-title">2. Suscripción mensual ($119/mes)</h3>
@@ -265,70 +263,6 @@ nav.navbar {
         }
       });
     })();
-
-    <!-- SDK de PayPal SOLO con hosted-buttons -->
-<script src="https://www.paypal.com/sdk/js?client-id=BAAvfWN4GoqHFqF5RyIexV_xHL5HZE-RenYZcB4H-AOU13qi9u99TfRHUawCIAJlGAaNWOeioRF0pK-fcE&components=hosted-buttons&enable-funding=venmo&currency=USD"></script>
-
-<script>
-  const submitBtn = document.getElementById('submitBtn');
-  const paypalSuscripcion = document.getElementById('paypal-suscripcion');
-
-  let depositoPagado = false;
-  let suscripcionPagada = false;
-
-  // Renderiza el botón del depósito inicial (Hosted Button)
-  paypal.HostedButtons({
-    hostedButtonId: "CEZNRR834PVZ4",
-    onApprove: function () {
-      alert("Depósito pagado correctamente.");
-      depositoPagado = true;
-
-      // Activar suscripción
-      paypalSuscripcion.classList.remove("disabled");
-    }
-  }).render("#paypal-container-CEZNRR834PVZ4");
-
-  // SDK adicional para suscripción
-  const script = document.createElement("script");
-  script.src = "https://www.paypal.com/sdk/js?client-id=AXEcXn7TJDcigKv90GQ_PFH4ZPO_a1lX8okIkuVx8SLhe4hZ2e6A6guHxeVDJELrV_dKMhovIl-WP60A&vault=true&intent=subscription&currency=USD";
-  script.onload = () => {
-    paypal.Buttons({
-      style: {
-        shape: 'rect',
-        color: 'gold',
-        layout: 'vertical',
-        label: 'subscribe',
-      },
-      createSubscription: function (data, actions) {
-        return actions.subscription.create({
-          plan_id: 'P-7GG71663VP171750UNBGVNNQ'
-        });
-      },
-      onApprove: function (data) {
-        alert('¡Suscripción activada! ID: ' + data.subscriptionID);
-        suscripcionPagada = true;
-
-        if (depositoPagado) {
-          submitBtn.disabled = false;
-          submitBtn.setAttribute('aria-disabled', 'false');
-          submitBtn.classList.add('enabled');
-        }
-      }
-    }).render('#paypal-suscripcion');
-  };
-  document.body.appendChild(script);
-
-  // Evento botón enviar
-  submitBtn.addEventListener('click', function () {
-    if (depositoPagado && suscripcionPagada) {
-      alert('Formulario enviado. ¡Gracias por tu pago!');
-      // window.location.href = 'gracias.html';
-    } else {
-      alert('Debes completar ambos pagos antes de continuar.');
-    }
-  });
-</script>
-
   </script>
 </body>
 </html>
