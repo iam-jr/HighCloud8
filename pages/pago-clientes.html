@@ -2,14 +2,12 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <link rel="stylesheet" href="../css/styles.css"/>
-  <link rel="stylesheet" href="../css/formulario.css"/>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/formulario.css" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pago | High Cloud 8</title>
   <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-    }
+    *, *::before, *::after { box-sizing: border-box; }
 
     html, body {
       height: 100%;
@@ -24,9 +22,7 @@
       color: #333;
     }
 
-    nav.navbar {
-      display: none !important;
-    }
+    nav.navbar { display: none !important; }
 
     h2, h3 {
       color: #1a54dd;
@@ -48,9 +44,9 @@
       transition: opacity 0.4s ease;
     }
 
-    /* Visualmente desactivado pero aún funcional */
     #paypal-suscripcion.not-ready {
       opacity: 0.3;
+      pointer-events: none;
     }
 
     #submitBtn {
@@ -97,17 +93,16 @@
 
   <button id="submitBtn" disabled aria-disabled="true">Enviar Formulario</button>
 
-  <!-- PayPal SDK -->
-  <script src="https://www.paypal.com/sdk/js?client-id=AXEcXn7TJDcigKv90GQ_PFH4ZPO_a1lX8okIkuVx8SLhe4hZ2e6A6guHxeVDJELrV_dKMhovIl-WP60A&vault=true&intent=subscription&currency=USD"></script>
+  <!-- PayPal SDK con intent=subscription Y order -->
+  <script src="https://www.paypal.com/sdk/js?client-id=AXEcXn7TJDcigKv90GQ_PFH4ZPO_a1lX8okIkuVx8SLhe4hZ2e6A6guHxeVDJELrV_dKMhovIl-WP60A&vault=true&intent=subscription,authorize,capture&currency=USD"></script>
 
   <script>
     const submitBtn = document.getElementById('submitBtn');
     const paypalSuscripcion = document.getElementById('paypal-suscripcion');
-
     let depositoPagado = false;
     let suscripcionPagada = false;
 
-    // Botón depósito
+    // Botón de depósito
     paypal.Buttons({
       style: {
         shape: 'pill',
@@ -117,9 +112,7 @@
       },
       createOrder: function (data, actions) {
         return actions.order.create({
-          purchase_units: [{
-            amount: { value: '199.00' }
-          }]
+          purchase_units: [{ amount: { value: '199.00' } }]
         });
       },
       onApprove: function (data, actions) {
@@ -127,48 +120,41 @@
           alert('Depósito pagado por: ' + details.payer.name.given_name);
           depositoPagado = true;
           paypalSuscripcion.classList.remove('not-ready');
+          renderSuscripcionButton(); // Activamos suscripción
         });
       }
     }).render('#paypal-deposito');
 
-    // Botón suscripción
-    paypal.Buttons({
-      style: {
-        shape: 'rect',
-        color: 'gold',
-        layout: 'vertical',
-        label: 'subscribe',
-      },
-      onInit: function(data, actions) {
-        actions.disable(); // inicialmente desactivado
-        const interval = setInterval(() => {
-          if (depositoPagado) {
-            actions.enable();
-            clearInterval(interval);
+    // Función para cargar botón de suscripción después del depósito
+    function renderSuscripcionButton() {
+      paypal.Buttons({
+        style: {
+          shape: 'rect',
+          color: 'gold',
+          layout: 'vertical',
+          label: 'subscribe',
+        },
+        createSubscription: function (data, actions) {
+          return actions.subscription.create({
+            plan_id: 'P-7GG71663VP171750UNBGVNNQ'
+          });
+        },
+        onApprove: function (data, actions) {
+          alert('¡Suscripción activada! ID: ' + data.subscriptionID);
+          suscripcionPagada = true;
+          if (depositoPagado && suscripcionPagada) {
+            submitBtn.disabled = false;
+            submitBtn.setAttribute('aria-disabled', 'false');
+            submitBtn.classList.add('enabled');
           }
-        }, 300);
-      },
-      createSubscription: function (data, actions) {
-        return actions.subscription.create({
-          plan_id: 'P-7GG71663VP171750UNBGVNNQ'
-        });
-      },
-      onApprove: function (data, actions) {
-        alert('¡Suscripción activada! ID: ' + data.subscriptionID);
-        suscripcionPagada = true;
-        if (depositoPagado && suscripcionPagada) {
-          submitBtn.disabled = false;
-          submitBtn.setAttribute('aria-disabled', 'false');
-          submitBtn.classList.add('enabled');
         }
-      }
-    }).render('#paypal-suscripcion');
+      }).render('#paypal-suscripcion');
+    }
 
-    // Botón de envío
+    // Envío del formulario
     submitBtn.addEventListener('click', function () {
       if (depositoPagado && suscripcionPagada) {
         alert('Formulario enviado. ¡Gracias por tu pago!');
-        // Aquí puedes hacer redirección o envío de datos
         // window.location.href = 'gracias.html';
       } else {
         alert('Debes completar ambos pagos antes de continuar.');
