@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Formulario de Proyecto | High Cloud 8</title>
 
   <!-- Estilo global -->
-  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/styles.css"/>
 
+  <link rel="stylesheet" href="../css/formulario.css"/>
   <!-- Boxicons -->
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 
@@ -21,6 +22,10 @@
   <script defer src="../js/script.js"></script>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+  <script src="https://www.paypal.com/sdk/js?client-id=AXEcXn7TJDcigKv90GQ_PFH4ZPO_a1lX8okIkuVx8SLhe4hZ2e6A6guHxeVDJELrV_dKMhovIl-WP60A&vault=true&intent=subscription&currency=USD" data-sdk-integration-source="button-factory"></script>
+<main id="formulario-proyecto" style="margin-top: 100px;">
+
 </head>
 <body>
 
@@ -43,7 +48,7 @@
   <form action="send_formulario.php" method="POST">
   <main id="formulario-proyecto">
     <form id="clienteForm" enctype="multipart/form-data">
-      <h1>Cuéntanos tu visión de diseño</h1>
+      <h1>Cuéntanos Tu Visión De Diseño</h1>
       <p>Este formulario es tu espacio para expresar cómo deseas que se vea y funcione tu página web. Mientras más detalles nos brindes, mejor podremos traducir tu visión en un diseño profesional, moderno y atractivo.</p>
 
       <section>
@@ -201,15 +206,10 @@
       </section>
 
 
-        <div id="archivosUpload">
-          <label>Adjunta todo el contenido relevante (textos, imágenes, PDFs):
-            <input type="file" name="archivos[]" multiple accept="image/*,.pdf,.doc,.docx">
-          </label>
-        </div>
-      </section>
+  
 
 
-         <a href="pago-clientes.html" class="btn btn-primary">Enviar Formulario</a>
+      <a href="pago-clientes.html" class="btn btn-primary">Enviar Formulario</a>
     </form>
   </main>
 
