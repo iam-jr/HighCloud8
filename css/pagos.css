@@ -1,105 +1,237 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
+ /* Reset básico */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    html {
+  height: 100%;
+  display:flex;
+  justify-content: center;
+  margin-top: 600px;
+  align-items: center;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f9f9f9;
   color: #333;
-}
-
-header {
-  background-color: #000;
-  color: white;
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.logo-img {
-  height: 50px;
+  line-height: 1.5;
 }
 
 nav.navbar {
-  display: flex;
-  gap: 1rem;
+  display: none !important;
 }
 
-nav.navbar a {
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-}
 
-nav.navbar a:hover {
-  text-decoration: underline;
-}
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 2rem;
+      margin: 0;
+      background-color: #f9f9f9;
+      color: #333;
+;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
 
-main {
+    header.header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 1rem;
+    }
+
+    .logo-img {
+      max-height: 50px;
+      width: auto;
+    }
+
+    /* Navegación simple */
+    nav.navbar {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    nav.navbar a {
+      text-decoration: none;
+      color: #1a54dd;
+      font-weight: 600;
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    nav.navbar a:hover,
+    nav.navbar a.active {
+      background-color: #1a54dd;
+      color: #fff;
+    }
+
+    h2, h3 {
+      margin-top: 2rem;
+      color: #1a54dd;
+      font-weight: 700;
+    }
+
+    p {
+      margin-top: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .pricing-img {
+      width: 600px;
+      max-width: 100%;
+      margin: 1.5rem 0 2rem;
+      display: block;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(26, 84, 221, 0.1);
+    }
+
+    /* Botones PayPal */
+    #paypal-deposito,
+    #paypal-suscripcion {
+      margin-bottom: 1.5rem;
+      transition: opacity 0.4s ease;
+    }
+
+    #paypal-suscripcion.ready {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    /* Botón enviar */
+    #submitBtn {
+      display: block;
+      width: 100%;
+      max-width: 320px;
+      margin: 3rem auto 0 auto;
+      padding: 1rem 2rem;
+      background-color: #1a54dd;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: not-allowed;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      box-shadow: 0 8px 20px rgba(26, 84, 221, 0.3);
+    }
+
+    #submitBtn.enabled {
+      cursor: pointer;
+      background-color: #0041a8;
+      box-shadow: 0 12px 24px rgba(0, 65, 168, 0.4);
+    }
+
+    #submitBtn.enabled:hover {
+      background-color: #003080;
+      transform: scale(1.05);
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      body {
+        padding: 1rem;
+      }
+
+      .pricing-img {
+        width: 100%;
+      }
+
+      nav.navbar {
+        justify-content: center;
+      }
+    }
+    .plan-basico-box {
+  margin: 2.5rem auto;
   padding: 2rem;
-  max-width: 900px;
-  margin: auto;
+  max-width: 500px;
+  background-color: #fff;
+  border: 2px solid #FFD140;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  text-align: center;
 }
 
-h2, h3 {
+.plan-basico-box h3 {
+  margin-top: 0;
+  color: #1a54dd;
+  font-size: 1.4rem;
+}
+
+.plan-basico-box p {
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Estilo del botón PayPal personalizado */
+.pp-497F5HYDKV3XQ {
+  text-align: center;
+  border: none;
+  border-radius: 0.25rem;
+  min-width: 11.625rem;
+  padding: 0 2rem;
+  height: 2.625rem;
+  font-weight: bold;
+  background-color: #FFD140;
+  color: #000000;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  cursor: pointer;
+}
+.suscripcion-box {
+  margin: 2.5rem auto;
+  padding: 2rem;
+  max-width: 500px;
+  background-color: #fff;
+  border: 2px solid #FFD140;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  text-align: center;
+}
+
+.suscripcion-box h3 {
+  margin-top: 0;
+  color: #1a54dd;
+  font-size: 1.4rem;
+}
+
+.paypal-box {
   margin-top: 1.5rem;
 }
 
-.btn {
+/* Botón Enviar */
+.submit-box {
+  margin: 2rem auto;
+  max-width: 500px;
+  text-align: center;
+}
+
+#submitBtn {
   display: inline-block;
-  margin-top: 2rem;
-  padding: 12px 24px;
-  background-color: #0070ba;
+  padding: 1rem 2.5rem;
+  background-color: #1a54dd;
   color: white;
   border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.btn:disabled {
-  background-color: #ccc;
+  border-radius: 50px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  box-shadow: 0 8px 20px rgba(26, 84, 221, 0.3);
   cursor: not-allowed;
+  transition: all 0.3s ease;
 }
 
-#paypal-suscripcion {
-  opacity: 0.3;
-  pointer-events: none;
+#submitBtn.enabled {
+  cursor: pointer;
+  background-color: #0041a8;
+  box-shadow: 0 12px 24px rgba(0, 65, 168, 0.4);
 }
 
-.pricing-img {
-  width: 600px;
-  max-width: 100%;
-  margin: 1rem 0 2rem;
-  display: block;
-}
-
-footer {
-  background-color: #000;
-  color: white;
-  text-align: center;
-  padding: 1.5rem 2rem;
-  margin-top: 4rem;
-}
-
-footer a {
-  color: #ccc;
-  text-decoration: none;
-  margin: 0 10px;
-}
-
-footer a:hover {
-  color: white;
-}
-
-@media (max-width: 768px) {
-  nav.navbar {
-    flex-direction: column;
-    gap: 0.5rem;
-    margin-top: 1rem;
-  }
-
-  .logo-img {
-    height: 40px;
-  }
+#submitBtn.enabled:hover {
+  background-color: #003080;
+  transform: scale(1.05);
 }
