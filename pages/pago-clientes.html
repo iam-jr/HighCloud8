@@ -3,157 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <link rel="stylesheet" href="../css/styles.css"/>
-    <link rel="stylesheet" href="../css/formulario.css"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pago | High Cloud 8</title>
-  <style>
-    /* Reset básico */
-    *, *::before, *::after {
-      box-sizing: border-box;
-    }
-    html {
-  height: 100%;
-  display:flex;
-  justify-content: center;
-  margin-top: 400px;
-  align-items: center;
-  text-align: center;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f9f9f9;
-  color: #333;
-  line-height: 1.5;
-}
-
-nav.navbar {
-  display: none !important;
-}
-
-
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      padding: 2rem;
-      margin: 0;
-      background-color: #f9f9f9;
-      color: #333;
-;
-      line-height: 1.5;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    header.header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      margin-bottom: 2rem;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 1rem;
-    }
-
-    .logo-img {
-      max-height: 50px;
-      width: auto;
-    }
-
-    /* Navegación simple */
-    nav.navbar {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    nav.navbar a {
-      text-decoration: none;
-      color: #1a54dd;
-      font-weight: 600;
-      padding: 0.4rem 0.8rem;
-      border-radius: 8px;
-      transition: background-color 0.3s, color 0.3s;
-    }
-
-    nav.navbar a:hover,
-    nav.navbar a.active {
-      background-color: #1a54dd;
-      color: #fff;
-    }
-
-    h2, h3 {
-      margin-top: 2rem;
-      color: #1a54dd;
-      font-weight: 700;
-    }
-
-    p {
-      margin-top: 0.5rem;
-      font-size: 1rem;
-    }
-
-    .pricing-img {
-      width: 600px;
-      max-width: 100%;
-      margin: 1.5rem 0 2rem;
-      display: block;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(26, 84, 221, 0.1);
-    }
-
-    /* Botones PayPal */
-    #paypal-deposito,
-    #paypal-suscripcion {
-      margin-bottom: 1.5rem;
-      transition: opacity 0.4s ease;
-    }
-
-    #paypal-suscripcion.ready {
-      opacity: 0.3;
-      pointer-events: none;
-    }
-
-    /* Botón enviar */
-    #submitBtn {
-      display: block;
-      width: 100%;
-      max-width: 320px;
-      margin: 3rem auto 0 auto;
-      padding: 1rem 2rem;
-      background-color: #1a54dd;
-      color: white;
-      border: none;
-      border-radius: 50px;
-      font-size: 1.1rem;
-      font-weight: 700;
-      cursor: not-allowed;
-      transition: background-color 0.3s ease, transform 0.3s ease;
-      box-shadow: 0 8px 20px rgba(26, 84, 221, 0.3);
-    }
-
-    #submitBtn.enabled {
-      cursor: pointer;
-      background-color: #0041a8;
-      box-shadow: 0 12px 24px rgba(0, 65, 168, 0.4);
-    }
-
-    #submitBtn.enabled:hover {
-      background-color: #003080;
-      transform: scale(1.05);
-    }
-
-    /* Responsive */
-    @media (max-width: 480px) {
-      body {
-        padding: 1rem;
-      }
-
-      .pricing-img {
-        width: 100%;
-      }
-
-      nav.navbar {
-        justify-content: center;
-      }
-    }
-  </style>
+    <link rel="stylesheet" href="../css/pagos.css"
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <main id="main" style="margin-top: 80px;">
+<title>Pago | High Cloud 8</title>
 </head>
 
 <body>
@@ -175,18 +28,30 @@ nav.navbar {
 
     <img src="../img/HighCloud8Prices.png" alt="Precios de High Cloud 8" class="pricing-img" />
 
-    <section aria-labelledby="deposito-title">
-      <h3 id="deposito-title">1. Plan Básico ($299)</h3>
-      <div id="paypal-deposito"></div>
-    </section>
+<div class="plan-basico-box">
+  <h3>¿Prefieres solo el Plan Básico?</h3>
+  <p>Haz clic para comprar sin suscripción mensual.</p>
 
-    <section aria-labelledby="suscripcion-title" class="suscripcion-section">
-      <h3 id="suscripcion-title">2. Suscripción mensual ($119/mes)</h3>
-      <div id="paypal-suscripcion" class="disabled"></div>
+  <form action="https://www.paypal.com/ncp/payment/497F5HYDKV3XQ" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
+    <input class="pp-497F5HYDKV3XQ" type="submit" value="Plan Básico" />
+    <img src="https://www.paypalobjects.com/images/Debit_Credit_APM.svg" alt="cards" />
+    <section style="font-size: 0.75rem;">
+      Powered by 
+      <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;" />
     </section>
+  </form>
+</div>
 
-    <button id="submitBtn" disabled aria-disabled="true">Enviar Formulario</button>
-  </main>
+
+  <section aria-labelledby="suscripcion-title" class="suscripcion-box">
+  <h3 id="suscripcion-title">Suscripción mensual ($119/mes + $199/Activación)</h3>
+  <div id="paypal-suscripcion" class="paypal-box disabled"></div>
+</section>
+
+<div class="submit-box">
+  <button id="submitBtn" disabled aria-disabled="true">Enviar Formulario</button>
+</div>
+
 
   <!-- SDK de PayPal -->
   <script src="https://www.paypal.com/sdk/js?client-id=AXEcXn7TJDcigKv90GQ_PFH4ZPO_a1lX8okIkuVx8SLhe4hZ2e6A6guHxeVDJELrV_dKMhovIl-WP60A&vault=true&intent=subscription&currency=USD"></script>
