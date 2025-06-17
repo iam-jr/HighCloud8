@@ -6,7 +6,7 @@
   height: 100%;
   display:flex;
   justify-content: center;
-  margin-top: 40px;
+  margin-top: 600px;
   align-items: center;
   text-align: center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -234,4 +234,69 @@ nav.navbar {
 #submitBtn.enabled:hover {
   background-color: #003080;
   transform: scale(1.05);
+}
+
+@media only screen and (max-width: 980px) {
+  body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    background-color: #f9f9f9;
+  }
+
+  main {
+    width: 100%;
+    max-width: 980px;
+    padding: 1rem;
+    margin-top: 80px;
+    box-sizing: border-box;
+  }
+
+  .plan-basico-box,
+  .suscripcion-box,
+  .submit-box {
+    width: 100%;
+    max-width: 100%;
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+
+  .pricing-img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+
+  h2, h3, p {
+    text-align: center;
+  }
+
+  #submitBtn {
+    width: 100%;
+    font-size: 1rem;
+    padding: 1rem;
+  }
+
+  .navbar {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+@media (max-width: 768px) {
+  html, body {
+    margin-top: 230px;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  main {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  .header {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
 }
