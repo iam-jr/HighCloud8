@@ -209,7 +209,7 @@
   
 
 
-      <a href="pago-clientes.html" class="btn btn-primary">Enviar Formulario</a>
+      <a href="pages/pago-clientes" class="btn btn-primary">Enviar Formulario</a>
     </form>
   </main>
 
