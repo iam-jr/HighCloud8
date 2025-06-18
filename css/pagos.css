@@ -83,7 +83,7 @@ nav.navbar {
     .pricing-img {
       width: 600px;
       max-width: 100%;
-      margin: 1.5rem 0 2rem;
+      margin: 1.5rem auto 2rem;
       display: block;
       border-radius: 12px;
       box-shadow: 0 8px 20px rgba(26, 84, 221, 0.1);
@@ -285,7 +285,7 @@ nav.navbar {
 }
 @media (max-width: 768px) {
   html, body {
-    margin-top: 280px;
+    margin-top: 230px;
     padding: 0;
     overflow-x: hidden;
   }
