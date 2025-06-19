@@ -285,13 +285,13 @@ nav.navbar {
 }
 @media (max-width: 768px) {
   html, body {
-    margin-top: 720px;
+    margin-top: 100px;
     padding: 0;
     overflow-x: hidden;
   }
 
   main {
-    margin-top: 180px !important;
+    margin-top: 0 !important;
     padding-top: 0 !important;
   }
 
