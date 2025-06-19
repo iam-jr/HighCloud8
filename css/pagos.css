@@ -285,7 +285,7 @@ nav.navbar {
 }
 @media (max-width: 768px) {
   html, body {
-    margin-top: 230px;
+    margin-top: 600px;
     padding: 0;
     overflow-x: hidden;
   }
