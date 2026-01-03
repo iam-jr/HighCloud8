@@ -4,11 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <span translate="no"><title>High Cloud 8</title></span>
-
-
-    <!-- Link to CSS styles -->
-    <link rel="stylesheet" href="css/styles.css">
+    <title>High Cloud 8</title>
 
     <!-- Boxicons for icons -->
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
@@ -18,39 +14,805 @@
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="img/favicon.ico" rel="icon">
     <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
-    <link href="img/android-chrome-192x192.png" rel="android-chrome-192x192">
-    <link href="img/android-chrome-512x512.png" rel="android-chrome-512x512">
-    <link href="img/favicon-16x16.png" rel="favicon-16x16">
-    <link href="img/favicon-32x32.png" rel="favicon-32x32">
 
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            background: #0b0b12;
+            color: #fff;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Canvas de fondo con puntos y líneas */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        body > section,
+        body > header {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header Section */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 999;
+            background: rgba(11, 11, 18, 0.85);
+            backdrop-filter: blur(15px);
+            padding: 25px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid rgba(25, 110, 238, 0.3);
+            box-shadow: 0 8px 32px rgba(25, 110, 238, 0.15),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .header:hover {
+            background: rgba(11, 11, 18, 0.9);
+            border-bottom-color: rgba(25, 110, 238, 0.5);
+            box-shadow: 0 12px 40px rgba(25, 110, 238, 0.2),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        }
+
+        .header .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s;
+        }
+
+        .header .logo img {
+            height: 70px;
+            filter: brightness(1.1);
+            transition: all 0.3s;
+        }
+
+        .header .logo:hover img {
+            filter: brightness(1.3) drop-shadow(0 0 8px rgba(25, 110, 238, 0.6));
+        }
+
+        .header .logo-text {
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #196eee, #5ba3ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 10px rgba(25, 110, 238, 0.3);
+        }
+
+        .header .navbar {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .header .navbar a {
+            color: #b0b0b0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 8px 12px;
+            font-size: 1.05rem;
+        }
+
+        .header .navbar a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(25, 110, 238, 0.2), transparent);
+            border-radius: 6px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: -1;
+        }
+
+        .header .navbar a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #196eee, #5ba3ff);
+            transition: width 0.3s ease;
+        }
+
+        .header .navbar a:hover {
+            color: #5ba3ff;
+        }
+
+        .header .navbar a:hover::before {
+            opacity: 1;
+        }
+
+        .header .navbar a:hover::after {
+            width: 100%;
+        }
+
+        .header .navbar a.active {
+            color: #196eee;
+            text-shadow: 0 0 10px rgba(25, 110, 238, 0.6);
+        }
+
+        .header .navbar a.active::after {
+            width: 100%;
+        }
+
+        .header .navbar a.active::before {
+            opacity: 1;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 8px;
+            z-index: 1000;
+            padding: 15px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .hamburger:hover {
+            background: rgba(25, 110, 238, 0.15);
+        }
+
+        .hamburger span {
+            width: 40px;
+            height: 4px;
+            background: linear-gradient(90deg, #196eee, #5ba3ff);
+            border-radius: 4px;
+            transition: all 0.3s;
+            box-shadow: 0 0 10px rgba(25, 110, 238, 0.6);
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(10px, 10px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(10px, -10px);
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+
+            .header .logo-text {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .header .navbar {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: rgba(11, 11, 18, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 30px;
+                padding: 80px 20px;
+                border-left: 2px solid rgba(25, 110, 238, 0.5);
+                box-shadow: -10px 0 30px rgba(25, 110, 238, 0.3);
+                transition: right 0.4s ease;
+                z-index: 999;
+            }
+
+            .header .navbar.active {
+                right: 0;
+            }
+
+            .header .navbar a {
+                font-size: 1.2rem;
+                padding: 12px 20px;
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 80px;
+            background: linear-gradient(135deg, rgba(25, 110, 238, 0.1), rgba(11, 11, 18, 0.9));
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(25, 110, 238, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(25, 110, 238, 0.1) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .hero .logo img {
+            height: 200px;
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 30px rgba(25, 110, 238, 0.5));
+        }
+
+        .hero .large-sign h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #196eee, #5ba3ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+        }
+
+        .hero .large-sign h2 {
+            font-size: 1.8rem;
+            color: #8e8e8e;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); filter: drop-shadow(0 0 3px #000); }
+            50% { transform: scale(1.05); filter: drop-shadow(0 0 15px rgba(25, 110, 238, 0.6)); }
+            100% { transform: scale(1); filter: drop-shadow(0 0 3px #000); }
+        }
+
+        /* About Section */
+        .about {
+            position: relative;
+            padding: 80px 20px;
+            background: rgba(11, 11, 18, 0.7);
+            border: 1px solid rgba(25, 110, 238, 0.1);
+            text-align: center;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #196eee, transparent);
+        }
+
+        .about .container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about h2 {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 30px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(25, 110, 238, 0.5);
+        }
+
+        .about p {
+            font-size: 1.1rem;
+            color: #b0b0b0;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        /* Services Section */
+        .service {
+            position: relative;
+            padding: 80px 20px;
+            background: rgba(11, 11, 18, 0.8);
+            text-align: center;
+        }
+
+        .service::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #196eee, transparent);
+        }
+
+        .services-heading {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 50px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(25, 110, 238, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        .services-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-item {
+            background: linear-gradient(135deg, rgba(25, 110, 238, 0.1), rgba(25, 110, 238, 0.05));
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(25, 110, 238, 0.3);
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .service-item:hover {
+            background: linear-gradient(135deg, rgba(25, 110, 238, 0.2), rgba(25, 110, 238, 0.1));
+            border-color: rgba(25, 110, 238, 0.6);
+            box-shadow: 0 8px 25px rgba(25, 110, 238, 0.3);
+            transform: translateY(-10px);
+        }
+
+        .service-item i {
+            font-size: 3rem;
+            color: #196eee;
+            margin-bottom: 15px;
+            text-shadow: 0 0 15px rgba(25, 110, 238, 0.5);
+        }
+
+        .service-item .service-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .service-item .service-description {
+            font-size: 1rem;
+            color: #a0a0a0;
+        }
+
+        /* Team Section */
+        .team {
+            position: relative;
+            padding: 80px 20px;
+            background: rgba(11, 11, 18, 0.7);
+            text-align: center;
+        }
+
+        .team::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #196eee, transparent);
+        }
+
+        .team .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .team h2 {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 50px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(25, 110, 238, 0.5);
+        }
+
+        .team-members {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .team-member {
+            background: linear-gradient(135deg, rgba(25, 110, 238, 0.1), rgba(25, 110, 238, 0.05));
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(25, 110, 238, 0.3);
+            transition: all 0.3s;
+        }
+
+        .team-member:hover {
+            background: linear-gradient(135deg, rgba(25, 110, 238, 0.15), rgba(25, 110, 238, 0.08));
+            border-color: rgba(25, 110, 238, 0.6);
+            box-shadow: 0 12px 35px rgba(25, 110, 238, 0.3);
+            transform: translateY(-10px);
+        }
+
+        .team-member img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(25, 110, 238, 0.3);
+        }
+
+        .team-member h3 {
+            font-size: 1.3rem;
+            color: #fff;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .team-member p {
+            font-size: 0.95rem;
+            color: #a0a0a0;
+            margin-bottom: 8px;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            position: relative;
+            padding: 80px 20px;
+            background: rgba(11, 11, 18, 0.8);
+            text-align: center;
+        }
+
+        .testimonials::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #196eee, transparent);
+        }
+
+        .testimonials .container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonials h2 {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 50px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(25, 110, 238, 0.5);
+        }
+
+        .testimonial-item {
+            background: linear-gradient(135deg, rgba(25, 110, 238, 0.1), rgba(25, 110, 238, 0.05));
+            border-left: 4px solid #196eee;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 25px;
+            transition: all 0.3s;
+            border: 1px solid rgba(25, 110, 238, 0.3);
+            border-left: 4px solid #196eee;
+        }
+
+        .testimonial-item:hover {
+            background: linear-gradient(135deg, rgba(25, 110, 238, 0.15), rgba(25, 110, 238, 0.08));
+            box-shadow: 0 8px 25px rgba(25, 110, 238, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .testimonial-item p {
+            font-size: 1.1rem;
+            color: #b0b0b0;
+            margin-bottom: 15px;
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        .testimonial-item p:last-child {
+            color: #196eee;
+            font-weight: 600;
+            font-style: normal;
+            font-size: 1rem;
+        }
+
+        /* Contact Form Section */
+        .contact-form {
+            position: relative;
+            padding: 80px 20px;
+            background: linear-gradient(135deg, rgba(25, 110, 238, 0.15), rgba(25, 110, 238, 0.05));
+            text-align: center;
+            border-top: 1px solid rgba(25, 110, 238, 0.3);
+            border-bottom: 1px solid rgba(25, 110, 238, 0.3);
+        }
+
+        .contact-form::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #196eee, transparent);
+        }
+
+        .contact-form .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-form h3 {
+            font-size: 2.2rem;
+            color: #fff;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(25, 110, 238, 0.5);
+        }
+
+        .contact-form p {
+            font-size: 1.1rem;
+            color: #a0a0a0;
+            margin-bottom: 30px;
+        }
+
+        .contact-form .btn {
+            background: linear-gradient(135deg, #196eee, #5ba3ff);
+            color: white;
+            font-weight: 600;
+            padding: 12px 35px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(25, 110, 238, 0.4);
+        }
+
+        .contact-form .btn:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 8px 25px rgba(25, 110, 238, 0.6);
+        }
+
+        /* Contact Us Section */
+        .contact-us {
+            position: relative;
+            background: rgba(11, 11, 18, 0.7);
+            padding: 80px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(25, 110, 238, 0.1);
+        }
+
+        .contact-us::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #196eee, transparent);
+        }
+
+        .contact-us h2 {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(25, 110, 238, 0.5);
+        }
+
+        .contact-us p {
+            font-size: 1.1rem;
+            color: #a0a0a0;
+            margin-bottom: 40px;
+        }
+
+        .contact-us .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-us .col-md-6 {
+            flex: 1 1 400px;
+        }
+
+        .contact-us h3 {
+            font-size: 1.5rem;
+            color: #196eee;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .contact-us .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .contact-us .form-group label {
+            color: #b0b0b0;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .contact-us .form-control {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(25, 110, 238, 0.3);
+            background: rgba(11, 11, 18, 0.5);
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s;
+        }
+
+        .contact-us .form-control:focus {
+            border-color: #196eee;
+            box-shadow: 0 0 15px rgba(25, 110, 238, 0.4);
+            outline: none;
+            background: rgba(11, 11, 18, 0.7);
+        }
+
+        .contact-us .form-control::placeholder {
+            color: #666;
+        }
+
+        .contact-us button.btn-primary {
+            background: linear-gradient(135deg, #196eee, #5ba3ff);
+            border: none;
+            color: #fff;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(25, 110, 238, 0.4);
+        }
+
+        .contact-us button.btn-primary:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 8px 25px rgba(25, 110, 238, 0.6);
+        }
+
+        .highcloud8-logo {
+            height: 110px;
+            max-width: 180px;
+            width: auto;
+            animation: pulse 2s infinite;
+            border-radius: 16px;
+            object-fit: contain;
+        }
+
+        .highcloud8-link {
+            color: #196eee;
+            text-shadow: 0 0 12px #5ba3ff, 0 0 2px #196eee;
+            transition: text-shadow .18s, color .18s;
+        }
+
+        .highcloud8-link:hover {
+            color: #4da3f5;
+            text-shadow: 0 0 18px #5ba3ff, 0 0 6px #196eee;
+        }
+
+        @media (max-width: 768px) {
+            .hero .large-sign h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .large-sign h2 {
+                font-size: 1.3rem;
+            }
+
+            .services-heading,
+            .about h2,
+            .team h2,
+            .testimonials h2,
+            .contact-us h2,
+            .contact-form h3 {
+                font-size: 1.8rem;
+            }
+
+            .services-list,
+            .team-members {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .highcloud8-logo {
+                height: 80px;
+                max-width: 150px;
+            }
+        }
+    </style>
 </head>
 
 <body>
+
+    <!-- Canvas de fondo con puntos y líneas azules -->
+    <canvas id="bg-canvas"></canvas>
 
     <!-- Header Section -->
     <header class="header">
         <a href="#" class="logo">
             <img src="img/highcloud8.png" alt="High Cloud 8 Logo" class="logo-img">
+            <span class="logo-text">High Cloud 8</span>
         </a>
 
-      <!-- Botón hamburguesa que aparece en móvil -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
 
         <nav class="navbar">
-            <a href="#" class="nav-link active">Home</a>
-            <a href="#about" class="nav-link">About</a>
-            <a href="#services" class="nav-link">Services</a>
-            <a href="#team" class="nav-link">Our Team</a>
-            <a href="#testimonials" class="nav-link">Testimonials</a>
-            <a href="#contact" class="nav-link">Contact</a>
+            <a href="#" class="nav-link active">Inicio</a>
+            <a href="#about" class="nav-link">Acerca de</a>
+            <a href="#services" class="nav-link">Servicios</a>
+            <a href="#team" class="nav-link">Nuestro Equipo</a>
+            <a href="#testimonials" class="nav-link">Testimonios</a>
+            <a href="#contact" class="nav-link">Contacto</a>
         </nav>
     </header>
 
@@ -59,75 +821,81 @@
         <div class="hero-content">
             <a href="#" class="logo"><img src="img/highcloud8-2.PNG" alt="High Cloud 8 Logo"></a>
             <div class="large-sign">
-                 <span translate="no"><h1>High Cloud 8</h1></span>
-                <h2>Web Design & Development</h2>
+                <h1>High Cloud 8</h1>
+                <h2>Diseño y Desarrollo Web</h2>
             </div>
         </div>
     </section>
 
+        <!-- Contact Form Section -->
+    <section id="contact" class="contact-form">
+        <div class="container">
+            <h3>Crea tu Página Web/App Hoy</h3>
+            <p>¿Quieres comenzar tu próximo proyecto web? ¡Ponte en contacto con nosotros hoy!</p>
+            <a href="pages/formulario-clientes.html" class="btn btn-primary">
+                Completar Formulario
+            </a>
+        </div>
+    </section>
+    
     <!-- About Us Section -->
     <section id="about" class="about">
         <div class="container">
-            <h2>About Us</h2>
-            <p>At High Cloud 8, we specialize in creating websites that not only look amazing but are also highly functional. With a team of skilled developers and designers, we bring your vision to life with the latest technologies and trends.</p>
-            <p>Whether you're a startup or a large enterprise, we craft custom web solutions tailored to your unique needs, helping you stand out in the digital world.</p>
+            <h2>Acerca de Nosotros</h2>
+            <p>En High Cloud 8, nos especializamos en crear sitios web que no solo se ven increíbles, sino que también son altamente funcionales. Con un equipo de desarrolladores y diseñadores capacitados, traemos tu visión a la vida con las últimas tecnologías y tendencias.</p>
+            <p>Ya sea que seas una startup o una gran empresa, creamos soluciones web personalizadas adaptadas a tus necesidades únicas, ayudándote a destacar en el mundo digital.</p>
         </div>
     </section>
 
-<!-- Services Section -->
-<section id="services" class="service">
-    <h2 class="services-heading">Here’s What We Do 🌐</h2>
-    <div class="services-list">
-  
-      <div class="service-item">
-        <i class="bx bx-laptop"></i>
-        <p class="service-title">Web Design</p>
-        <p class="service-description">Crafting beautiful and user-friendly websites to showcase your brand.</p>
-      </div>
-  
-      <div class="service-item">
-        <i class="bx bx-store"></i>
-        <p class="service-title">E-Commerce</p>
-        <p class="service-description">Custom online stores designed to drive sales and user engagement.</p>
-      </div>
-  
-      <div class="service-item">
-        <i class="bx bx-search-alt-2"></i>
-        <p class="service-title">SEO Optimization</p>
-        <p class="service-description">Get your site ranking higher with our expert SEO strategies.</p>
-      </div>
-  
-      <div class="service-item">
-        <i class="bx bx-share-alt"></i>
-        <p class="service-title">Social Media Integration</p>
-        <p class="service-description">Connect with your audience by integrating social media into your website.</p>
-      </div>
-  
-    </div>
-  </section>
-  
+    <!-- Services Section -->
+    <section id="services" class="service">
+        <h2 class="services-heading">Lo Que Hacemos 🌐</h2>
+        <div class="services-list">
+            <div class="service-item">
+                <i class="bx bx-laptop"></i>
+                <p class="service-title">Diseño Web</p>
+                <p class="service-description">Creamos sitios web hermosos y fáciles de usar para mostrar tu marca.</p>
+            </div>
+            <div class="service-item">
+                <i class="bx bx-store"></i>
+                <p class="service-title">E-Commerce</p>
+                <p class="service-description">Tiendas en línea personalizadas diseñadas para impulsar ventas y participación.</p>
+            </div>
+            <div class="service-item">
+                <i class="bx bx-search-alt-2"></i>
+                <p class="service-title">Optimización SEO</p>
+                <p class="service-description">Posiciona tu sitio más alto con nuestras estrategias SEO expertas.</p>
+            </div>
+            <div class="service-item">
+                <i class="bx bx-share-alt"></i>
+                <p class="service-title">Integración de Redes Sociales</p>
+                <p class="service-description">Conecta con tu audiencia integrando redes sociales en tu sitio web.</p>
+            </div>
+        </div>
+    </section>
+
     <!-- Our Team Section -->
     <section id="team" class="team">
         <div class="container">
-            <h2>Meet Our Talented Team</h2>
+            <h2>Conoce Nuestro Equipo Talentoso</h2>
             <div class="team-members">
                 <div class="team-member">
                     <img src="img/InternetipcLeadDesigner.JPG" alt="Team Member 1">
                     <h3>Internet iPC</h3>
-                    <p>Lead Designer</p>
-                    <p>Passionate about creating intuitive and advance pleasing designs that align with client goals.</p>
+                    <p>Diseñador Líder</p>
+                    <p>Apasionado por crear diseños intuitivos y atractivos que se alineen con los objetivos del cliente.</p>
                 </div>
                 <div class="team-member">
                     <img src="img/JeremyRayDeveloper.jpg" alt="Team Member 2">
                     <h3>Jeremy Ray</h3>
-                    <p>Developer</p>
-                    <p>With a strong background in front-end and back-end development, builds robust websites that perform.</p>
+                    <p>Desarrollador</p>
+                    <p>Con una sólida formación en desarrollo front-end y back-end, construye sitios web robustos y con alto rendimiento.</p>
                 </div>
                 <div class="team-member">
                     <img src="img/CommuniksSEOSpecialist.jpg" alt="Team Member 3">
-                     <span translate="no"><h3>Communiks</h3></span>
-                    <p>SEO Specialist</p>
-                    <p>Helping businesses grow online by optimizing their websites for search engines.</p>
+                    <h3>Communiks</h3>
+                    <p>Especialista en SEO</p>
+                    <p>Ayuda a los negocios a crecer en línea optimizando sus sitios web para motores de búsqueda.</p>
                 </div>
             </div>
         </div>
@@ -136,78 +904,239 @@
     <!-- Testimonials Section -->
     <section id="testimonials" class="testimonials">
         <div class="container">
-            <h2>What Our Clients Say</h2>
+            <h2>Lo Que Dicen Nuestros Clientes</h2>
             <div class="testimonial-item">
-                <p>"High Cloud 8 transformed our website into a lead-generating machine! Their team was professional, and the results speak for themselves."</p>
+                <p>"High Cloud 8 transformó nuestro sitio web en una máquina generadora de leads. Su equipo fue profesional y los resultados hablan por sí solos."</p>
                 <p>CEO, Communik</p>
             </div>
             <div class="testimonial-item">
-                <p>"From concept to launch, the team at High Cloud 8 was with us every step of the way. Our new site looks incredible and is so easy to manage."</p>
-                <p>Founder, iHighCloud8®</p>
+                <p>"Desde el concepto hasta el lanzamiento, el equipo de High Cloud 8 estuvo con nosotros en cada paso. Nuestro nuevo sitio se ve increíble y es muy fácil de administrar."</p>
+                <p>Fundador, iHighCloud8®</p>
             </div>
         </div>
     </section>
 
-    <!-- Contact Form Section -->
-    <section id="contact" class="contact-form">
-        <div class="container">
-            <h3>Let's Build Something Amazing Together</h3>
-            <p>Want to get started on your next web project? Get in touch with us today!</p>
-            <a href="pages/formulario-clientes.html" class="btn btn-primary">
-                Complete Form
-            </a>
-        </div>
-    </section>
+
 
     <!-- Contact Us Section with Map -->
     <section id="contact-us" class="contact-us">
-
-         <div class="row">
-      <!-- Imagen a la izquierda -->
-        <div class="container">
-            <h2>Contact Us</h2>
-            <p>Visit us at Instagram or send us a message using the contact form below:</p>             
-                </div>
-                <div class="col-md-6">
-                    <h3>Get In Touch</h3>
-                  <form action="send_contact.php" method="POST">
-                        <div class="form-group">
-                            <label for="name">Name:</label>
-                            <input type="text" id="name" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email:</label>
-                            <input type="email" id="email" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message:</label>
-                            <textarea id="message" class="form-control" rows="4" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
+        <div class="row">
+            <div class="container">
+                <h2>Contacto</h2>
+                <p>Visítanos en Instagram o envíanos un mensaje usando el formulario de contacto a continuación:</p>
+            </div>
+            <div class="col-md-6">
+                <h3>Ponte en Contacto</h3>
+                <form action="pages/send_contact.php" method="POST">
+                    <div class="form-group">
+                        <label for="name">Nombre:</label>
+                        <input type="text" id="name" name="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico:</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensaje:</label>
+                        <textarea id="message" name="message" class="form-control" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </form>
             </div>
         </div>
-
     </section>
 
-    <!-- Footer Section -->
-<footer>
-    <div class="container text-center">
-      <p>&copy;2025. All rights reserved.</p>
-      <p>
-        Follow us on 
-        <a href="https://instagram.com/highcloud8" target="_blank" class="social-link">
-          <i class='bx bxl-instagram'></i>
-        </a>
-      </p>
-    </div>
-  </footer>
+    <!-- High Cloud8 Futuristic Footer -->
+    <section id="highcloud8-footer" style="width:100%; min-height:280px; display:flex; justify-content:center; align-items:center; text-align:center; font-family:Arial, sans-serif; color:#000; background:#0b0b12; position:relative; overflow:hidden; padding:30px 20px; margin:0;">
+        <!-- Fondo tecnológico animado -->
+        <canvas id="highcloud8FooterCanvas" style="position:absolute; top:0; left:0; width:100%; background:#0b0b12;height:100%; z-index:0;"></canvas>
+        <!-- Contenido principal -->
+        <div class="footer container" style="position:relative; z-index:1; width:100%; max-width:900px; margin:0 auto; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:1.5rem 1rem; background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.015)); border-radius: 12px; border: 1px solid rgba(255,255,255,0.03); box-shadow: 0 8px 20px rgba(25,110,238,.2);">
+            <a href="https://www.instagram.com/highcloud8/" target="_blank" rel="noopener noreferrer" style="text-decoration:none; display:flex; flex-direction:column; align-items:center; justify-content:center; margin-bottom:12px; gap:8px;">
+                <img src="img/highcloud8-2.PNG" alt="High Cloud8 Logo" class="highcloud8-logo" style="height:120px; max-width:220px; width:auto; margin:0 0 12px 0; animation: pulse 2s infinite; border-radius:10px; object-fit:contain;">
+                <span style="font-size:32px; font-weight:bold; letter-spacing:0.5px; color:#196eee; text-shadow:0 0 8px #196eee, 0 0 2px #000; position:relative; display:flex; flex-direction:column; align-items:center; gap:15px;">
+                    <span>High Cloud 8</span>
+                    <span style="font-size:0.55em; font-weight:500; color:#8e8e8e; background:rgba(25,110,238,0.08); border-radius:8px; padding:15px 20px; box-shadow:0 0 10px rgba(25, 110, 238, 0.4); display:inline-flex; align-items:center; justify-content:center; gap:15px; transition: all 0.3s;">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="instagramGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#f09433;stop-opacity:1" />
+                                    <stop offset="25%" style="stop-color:#e6683c;stop-opacity:1" />
+                                    <stop offset="50%" style="stop-color:#dc2743;stop-opacity:1" />
+                                    <stop offset="75%" style="stop-color:#cc2366;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#bc1888;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <rect x="2" y="2" width="20" height="20" rx="5" stroke="url(#instagramGradient)" stroke-width="2.5"/>
+                            <circle cx="12" cy="12" r="4" stroke="url(#instagramGradient)" stroke-width="2.5"/>
+                            <circle cx="18.5" cy="5.5" r="1.5" fill="url(#instagramGradient)"/>
+                        </svg>
+                        <span style="font-size:1.8em; font-weight:600; color:#fff;">Instagram</span>
+                    </span>
+                </span>
+            </a>
+            <p style="margin-top:8px; font-size:18px; font-weight:600; color:#848484; text-shadow:0 0 3px #2b28e6; letter-spacing:0.1px;">
+                Diseño y Desarrollo de Web Apps 
+            </p>
+            <p style="margin-top:8px; font-size:16px; font-weight:500; color:#6f6f6f; text-shadow:0 0 3px #6f6f6f;">© 2025 High Cloud 8. Todos los derechos reservados. <span style="font-weight:bold;">®</span></p>
+        </div>
+    </section>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script async src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
 
-  
+    <script>
+        // Canvas de fondo con puntos y líneas azules
+        const bgCanvas = document.getElementById('bg-canvas');
+        const bgCtx = bgCanvas.getContext('2d');
+
+        function resizeBgCanvas() {
+            bgCanvas.width = window.innerWidth;
+            bgCanvas.height = window.innerHeight;
+        }
+
+        resizeBgCanvas();
+        window.addEventListener('resize', resizeBgCanvas);
+
+        let particles = [];
+        const particleCount = 100;
+        const connectionDistance = 150;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * bgCanvas.width;
+                this.y = Math.random() * bgCanvas.height;
+                this.vx = (Math.random() - 0.5) * 1;
+                this.vy = (Math.random() - 0.5) * 1;
+                this.size = Math.random() * 2 + 1;
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0) this.x = bgCanvas.width;
+                if (this.x > bgCanvas.width) this.x = 0;
+                if (this.y < 0) this.y = bgCanvas.height;
+                if (this.y > bgCanvas.height) this.y = 0;
+            }
+
+            draw() {
+                bgCtx.fillStyle = `rgba(25, 110, 238, ${this.opacity})`;
+                bgCtx.beginPath();
+                bgCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                bgCtx.fill();
+            }
+        }
+
+        // Crear partículas
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        function drawLines() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < connectionDistance) {
+                        const opacity = (1 - distance / connectionDistance) * 0.3;
+                        bgCtx.strokeStyle = `rgba(25, 110, 238, ${opacity})`;
+                        bgCtx.lineWidth = 1;
+                        bgCtx.beginPath();
+                        bgCtx.moveTo(particles[i].x, particles[i].y);
+                        bgCtx.lineTo(particles[j].x, particles[j].y);
+                        bgCtx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animateBg() {
+            bgCtx.fillStyle = 'rgba(11, 11, 18, 0.05)';
+            bgCtx.fillRect(0, 0, bgCanvas.width, bgCanvas.height);
+
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+
+            drawLines();
+            requestAnimationFrame(animateBg);
+        }
+
+        animateBg();
+
+        // Smooth scroll para los links de navegación con offset para el header
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    const header = document.querySelector('.header');
+                    const headerHeight = header.offsetHeight;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset;
+                    const offsetPosition = targetPosition - headerHeight - 20; // 20px de espacio extra
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Actualizar nav activa al scroll
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section[id]');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.navbar a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Menú hamburguesa
+        const hamburger = document.querySelector('.hamburger');
+        const navbar = document.querySelector('.navbar');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navbar.classList.toggle('active');
+        });
+
+        // Cerrar menú al hacer clic en un enlace
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navbar.classList.remove('active');
+            });
+        });
+
+        // Cerrar menú al hacer clic fuera
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navbar.contains(e.target)) {
+                hamburger.classList.remove('active');
+                navbar.classList.remove('active');
+            }
+        });
+    </script>
 </body>
+
 </html>
