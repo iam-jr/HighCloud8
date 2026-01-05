@@ -320,42 +320,245 @@
         /* About Section */
         .about {
             position: relative;
-            padding: 80px 20px;
-            background: rgba(11, 11, 18, 0.7);
-            border: 1px solid rgba(25, 110, 238, 0.1);
+            padding: 120px 20px;
+            background: linear-gradient(135deg, rgba(11, 11, 18, 0.98), rgba(25, 110, 238, 0.05));
+            border-top: 3px solid rgba(25, 110, 238, 0.6);
+            border-bottom: 3px solid rgba(25, 110, 238, 0.6);
             text-align: center;
+            overflow: hidden;
         }
 
         .about::before {
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #196eee, transparent);
+            left: -100%;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(25, 110, 238, 0.1), transparent);
+            animation: shimmer 4s infinite;
+        }
+
+        .about::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(25, 110, 238, 0.15), transparent);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { 
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.5;
+            }
+            50% { 
+                transform: translate(-50%, -50%) scale(1.3);
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .about .container {
-            max-width: 900px;
+            max-width: 1100px;
             margin: 0 auto;
             position: relative;
             z-index: 1;
+            background: linear-gradient(135deg, rgba(25, 110, 238, 0.08), rgba(91, 163, 255, 0.03));
+            padding: 60px 50px;
+            border-radius: 25px;
+            border: 2px solid rgba(25, 110, 238, 0.3);
+            box-shadow: 0 15px 50px rgba(25, 110, 238, 0.25), 
+                        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 1s ease-out;
         }
 
         .about h2 {
-            font-size: 2.5rem;
-            color: #fff;
-            margin-bottom: 30px;
-            font-weight: 700;
-            text-shadow: 0 0 15px rgba(25, 110, 238, 0.5);
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, #5ba3ff 0%, #196eee 50%, #5ba3ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 45px;
+            font-weight: 900;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 20px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: fadeInUp 1s ease-out 0.2s both;
+            text-shadow: 0 0 40px rgba(25, 110, 238, 0.5);
+        }
+
+        .about h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 5px;
+            background: linear-gradient(90deg, transparent, #196eee, #5ba3ff, #196eee, transparent);
+            border-radius: 3px;
+            box-shadow: 0 0 20px rgba(25, 110, 238, 1);
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(25, 110, 238, 1);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(91, 163, 255, 1);
+            }
         }
 
         .about p {
-            font-size: 1.1rem;
-            color: #b0b0b0;
-            line-height: 1.8;
-            margin-bottom: 15px;
+            font-size: 1.2rem;
+            color: #c8daf0;
+            line-height: 1.9;
+            margin-bottom: 22px;
+            font-weight: 400;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+            animation: fadeInUp 1s ease-out 0.4s both;
+            letter-spacing: 0.5px;
+            opacity: 0.95;
+        }
+
+        .about p:first-of-type {
+            font-size: 1.5rem;
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #ffffff, #b8d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease-out 0.3s both;
+            letter-spacing: 0.8px;
+        }
+
+        .about-boxes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .about-box {
+            background: linear-gradient(135deg, rgba(25, 110, 238, 0.15), rgba(25, 110, 238, 0.08));
+            padding: 35px 40px;
+            padding-left: 50px;
+            border-radius: 18px;
+            border: 2px solid rgba(25, 110, 238, 0.4);
+            box-shadow: 0 10px 40px rgba(25, 110, 238, 0.25),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            position: relative;
+            backdrop-filter: blur(8px);
+            transition: all 0.4s ease;
+            animation: fadeInUp 1s ease-out both;
+        }
+
+        .about-box:nth-child(1) { animation-delay: 0.5s; }
+        .about-box:nth-child(2) { animation-delay: 0.6s; background: linear-gradient(135deg, rgba(91, 163, 255, 0.15), rgba(25, 110, 238, 0.08)); border-color: rgba(91, 163, 255, 0.4); }
+        .about-box:nth-child(3) { animation-delay: 0.7s; }
+        .about-box:nth-child(4) { animation-delay: 0.8s; background: linear-gradient(135deg, rgba(91, 163, 255, 0.15), rgba(25, 110, 238, 0.08)); border-color: rgba(91, 163, 255, 0.4); }
+        .about-box:nth-child(5) { animation-delay: 0.9s; }
+        .about-box:nth-child(6) { animation-delay: 1s; background: linear-gradient(135deg, rgba(91, 163, 255, 0.15), rgba(25, 110, 238, 0.08)); border-color: rgba(91, 163, 255, 0.4); }
+
+        .about-box:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 50px rgba(25, 110, 238, 0.35),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+            border-color: rgba(25, 110, 238, 0.6);
+        }
+
+        .about-box:nth-child(even):hover {
+            box-shadow: 0 15px 50px rgba(91, 163, 255, 0.35),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+            border-color: rgba(91, 163, 255, 0.6);
+        }
+
+        .about-box::before {
+            content: '☁';
+            position: absolute;
+            left: 15px;
+            top: 38px;
+            font-size: 1.5rem;
+            color: #196eee;
+            text-shadow: 0 0 20px rgba(25, 110, 238, 1);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .about-box:nth-child(even)::before {
+            color: #5ba3ff;
+            text-shadow: 0 0 20px rgba(91, 163, 255, 1);
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                text-shadow: 0 0 20px rgba(25, 110, 238, 1);
+                transform: scale(1);
+            }
+            50% {
+                text-shadow: 0 0 30px rgba(25, 110, 238, 1.5);
+                transform: scale(1.1);
+            }
+        }
+
+        .about-box h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 18px;
+            margin-top: 0;
+            background: linear-gradient(135deg, #5ba3ff, #196eee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(25, 110, 238, 0.5);
+            letter-spacing: 0.5px;
+            line-height: 1.4;
+        }
+
+        .about-box:nth-child(even) h3 {
+            background: linear-gradient(135deg, #196eee, #5ba3ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-box p {
+            font-size: 1.05rem;
+            color: #e5f0ff;
+            line-height: 1.9;
+            font-weight: 400;
+            text-align: left;
+            margin: 0;
         }
 
         /* Services Section */
@@ -496,16 +699,33 @@
         }
 
         .team-member h3 {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             color: #fff;
-            margin-bottom: 5px;
-            font-weight: 600;
+            margin-bottom: 10px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #5ba3ff, #196eee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(25, 110, 238, 0.5);
+            letter-spacing: 0.5px;
         }
 
         .team-member p {
-            font-size: 0.95rem;
-            color: #a0a0a0;
-            margin-bottom: 8px;
+            font-size: 1rem;
+            color: #b8c5d6;
+            margin-bottom: 12px;
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        .team-member p:first-of-type {
+            color: #ffaa33;
+            font-weight: 600;
+            font-size: 1.05rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
         }
 
         /* Testimonials Section */
@@ -573,10 +793,84 @@
             font-size: 1rem;
         }
 
+        .testimonial-item .business-name {
+            color: #ffaa33;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(255, 170, 51, 0.4);
+        }
+
+        /* Review Form */
+        .review-form-container {
+            margin-top: 60px;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(25, 110, 238, 0.1), rgba(25, 110, 238, 0.05));
+            border-radius: 15px;
+            border: 1px solid rgba(25, 110, 238, 0.3);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .review-form-container h3 {
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 25px;
+            font-weight: 600;
+            text-shadow: 0 0 15px rgba(25, 110, 238, 0.5);
+        }
+
+        .review-form .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .review-form label {
+            display: block;
+            color: #b8c5d6;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .review-form .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(11, 11, 18, 0.6);
+            border: 1px solid rgba(25, 110, 238, 0.3);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .review-form .form-control:focus {
+            outline: none;
+            border-color: #196eee;
+            box-shadow: 0 0 15px rgba(25, 110, 238, 0.4);
+        }
+
+        .review-form .btn-primary {
+            background: linear-gradient(135deg, #196eee, #5ba3ff);
+            color: #fff;
+            padding: 12px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .review-form .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(25, 110, 238, 0.4);
+        }
+
         /* Contact Form Section */
         .contact-form {
             position: relative;
-            padding: 80px 20px;
+            padding: 100px 20px;
             background: linear-gradient(135deg, rgba(25, 110, 238, 0.15), rgba(25, 110, 238, 0.05));
             text-align: center;
             border-top: 1px solid rgba(25, 110, 238, 0.3);
@@ -596,39 +890,46 @@
         .contact-form .container {
             position: relative;
             z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .contact-form h3 {
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             color: #fff;
-            margin-bottom: 15px;
+            margin-bottom: 25px;
             font-weight: 700;
-            text-shadow: 0 0 15px rgba(25, 110, 238, 0.5);
+            text-shadow: 0 0 20px rgba(25, 110, 238, 0.6);
+            line-height: 1.3;
         }
 
         .contact-form p {
-            font-size: 1.1rem;
-            color: #fff;
-            margin-bottom: 30px;
+            font-size: 1.2rem;
+            color: #d0dae8;
+            margin-bottom: 40px;
+            line-height: 1.6;
+            padding: 0 20px;
         }
 
         .contact-form .btn {
             background: linear-gradient(135deg, #196eee, #5ba3ff);
             color: white;
             font-weight: 600;
-            padding: 12px 35px;
+            padding: 16px 50px;
             border-radius: 50px;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             text-decoration: none;
             transition: all 0.3s;
             border: none;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(25, 110, 238, 0.4);
+            box-shadow: 0 6px 20px rgba(25, 110, 238, 0.5);
+            display: inline-block;
+            margin-top: 10px;
         }
 
         .contact-form .btn:hover {
-            transform: scale(1.05) translateY(-2px);
-            box-shadow: 0 8px 25px rgba(25, 110, 238, 0.6);
+            transform: scale(1.08) translateY(-3px);
+            box-shadow: 0 10px 30px rgba(25, 110, 238, 0.7);
         }
 
         /* Contact Us Section */
@@ -777,12 +1078,150 @@
             .team-members {
                 grid-template-columns: 1fr;
             }
+
+            /* About Section Responsive */
+            .about {
+                padding: 80px 15px;
+            }
+
+            .about .container {
+                padding: 40px 25px;
+                border-radius: 20px;
+            }
+
+            .about h2 {
+                font-size: 2.2rem;
+                margin-bottom: 30px;
+                padding-bottom: 15px;
+            }
+
+            .about h2::after {
+                width: 80px;
+                height: 4px;
+            }
+
+            .about p:first-of-type {
+                font-size: 1.2rem;
+                margin-bottom: 30px;
+                line-height: 1.7;
+            }
+
+            .about-boxes-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .about-box {
+                padding: 28px 25px;
+                padding-left: 50px;
+            }
+
+            .about-box::before {
+                font-size: 1.3rem;
+                left: 13px;
+                top: 32px;
+            }
+
+            .about-box p {
+                font-size: 1.05rem;
+                line-height: 1.8;
+            }
         }
 
         @media (max-width: 600px) {
             .highcloud8-logo {
                 height: 80px;
                 max-width: 150px;
+            }
+
+            /* About Section Mobile */
+            .about {
+                padding: 60px 10px;
+            }
+
+            .about .container {
+                padding: 30px 20px;
+                border-radius: 15px;
+            }
+
+            .about h2 {
+                font-size: 1.8rem;
+                margin-bottom: 25px;
+                letter-spacing: 1px;
+            }
+
+            .about h2::after {
+                width: 60px;
+                height: 3px;
+            }
+
+            .about p:first-of-type {
+                font-size: 1.1rem;
+                margin-bottom: 25px;
+                line-height: 1.6;
+                padding: 0 5px;
+            }
+
+            .about-boxes-grid {
+                gap: 18px;
+            }
+
+            .about-box {
+                padding: 25px 20px;
+                padding-left: 45px;
+                border-radius: 12px;
+            }
+
+            .about-box::before {
+                font-size: 1.2rem;
+                left: 11px;
+                top: 30px;
+            }
+
+            .about-box p {
+                font-size: 0.95rem;
+                line-height: 1.7;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* About Section Small Mobile */
+            .about {
+                padding: 50px 8px;
+            }
+
+            .about .container {
+                padding: 25px 15px;
+            }
+
+            .about h2 {
+                font-size: 1.5rem;
+                margin-bottom: 20px;
+            }
+
+            .about p:first-of-type {
+                font-size: 1rem;
+                margin-bottom: 20px;
+            }
+
+            .about-boxes-grid {
+                gap: 15px;
+            }
+
+            .about-box {
+                padding: 20px 15px;
+                padding-left: 38px;
+            }
+
+            .about-box::before {
+                font-size: 1.1rem;
+                left: 9px;
+                top: 27px;
+            }
+
+            .about-box p {
+                font-size: 0.9rem;
+                line-height: 1.6;
             }
         }
     </style>
@@ -797,7 +1236,6 @@
     <header class="header">
         <a href="#" class="logo">
             <img src="img/highcloud8.png" alt="High Cloud 8 Logo" class="logo-img">
-            <span class="logo-text">High Cloud 8</span>
         </a>
 
         <div class="hamburger">
@@ -831,10 +1269,10 @@
         <!-- Contact Form Section -->
     <section id="contact" class="contact-form">
         <div class="container">
-            <h3>Crea tu Página Web/App Hoy</h3>
-            <p>¿Quieres comenzar tu próximo proyecto web? ¡Ponte en contacto con nosotros hoy!</p>
+            <h3>¿Listo para Crear Tu Página Web o App?</h3>
+            <p>Completa el formulario ahora y empieza a construir tu proyecto hoy mismo. ¡Es rápido y fácil!</p>
             <a href="pages/formulario-clientes.html" class="btn btn-primary">
-                Completar Formulario
+                Empezar Ahora
             </a>
         </div>
     </section>
@@ -843,8 +1281,39 @@
     <section id="about" class="about">
         <div class="container">
             <h2>Acerca de Nosotros</h2>
-            <p>En High Cloud 8, nos especializamos en crear sitios web que no solo se ven increíbles, sino que también son altamente funcionales. Con un equipo de desarrolladores y diseñadores capacitados, traemos tu visión a la vida con las últimas tecnologías y tendencias.</p>
-            <p>Ya sea que seas una startup o una gran empresa, creamos soluciones web personalizadas adaptadas a tus necesidades únicas, ayudándote a destacar en el mundo digital.</p>
+            <p>Hacemos páginas web, logos y publicidad que funcionan. Simple, rápido y profesional. No complicamos las cosas.</p>
+            
+            <div class="about-boxes-grid">
+                <div class="about-box">
+                    <h3>Empezamos Desde Donde Estés</h3>
+                    <p>¿Ya tienes tu negocio? ¿Tienes una idea? ¿O <em>apenas estás comenzando?</em> <strong>No importa en qué etapa estés.</strong> Nosotros te ayudamos <strong>desde cero</strong> hasta tener todo listo.</p>
+                </div>
+                
+                <div class="about-box">
+                    <h3>Tu Negocio en Internet 24/7</h3>
+                    <p>Tu negocio abierto <strong>24/7 en internet</strong> es <em>esencial</em>, incluso si ya tienes local físico. <strong>Más visibilidad significa más ventas.</strong></p>
+                </div>
+                
+                <div class="about-box">
+                    <h3>Diseño Web y Logo Profesional</h3>
+                    <p>Creamos tu <strong>logo desde cero</strong> y diseñamos tu <strong>página web</strong> con <em>animaciones modernas</em>, <strong>CSS avanzado</strong> y <strong>bases de datos profesionales.</strong></p>
+                </div>
+                
+                <div class="about-box">
+                    <h3>Publicidad en Redes Sociales</h3>
+                    <p>Lanzamos tus <strong>campañas publicitarias</strong> en <em>Facebook Ads, Instagram Ads, Google Ads y YouTube Ads</em> para que llegues <strong>directamente a tus clientes ideales.</strong></p>
+                </div>
+                
+                <div class="about-box">
+                    <h3>Panel de Control Fácil de Usar</h3>
+                    <p>Te entregamos un <strong>panel de administración intuitivo</strong> donde <em>tú mismo controlas tu página:</em> actualiza textos, cambia imágenes, agrega productos o borra contenido cuando quieras, <strong>sin programador.</strong></p>
+                </div>
+                
+                <div class="about-box">
+                    <h3>Dominio, Hosting y Soporte Incluido</h3>
+                    <p>Incluimos la conexión de tu <strong>dominio, hosting seguro y soporte técnico.</strong> Todo funciona <em>rápido</em>, es <strong>100% seguro</strong> y <em>súper fácil de usar.</em> Trabajamos lado a lado contigo hasta que estés <strong>completamente satisfecho</strong> con el resultado.</p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -884,19 +1353,19 @@
                     <img src="img/InternetipcLeadDesigner.JPG" alt="Diseño Web">
                     <h3>Diseño Web Moderno</h3>
                     <p>Diseño Gráfico & Visual</p>
-                    <p>Logos, identidad de marca, interfaces atractivas y fotografía web profesional.</p>
+                    <p>Creamos logos, diseño de marca completa, páginas web atractivas y todo lo que necesitas para que tu negocio se vea profesional.</p>
                 </div>
                 <div class="team-member">
                     <img src="img/frontbackend.webp" alt="Desarrollo">
                     <h3>Desarrollo Profesional</h3>
-                    <p>Backend, Frontend & Ciberseguridad</p>
-                    <p>Código limpio y seguro. Backend robusto, frontend con animaciones, bases de datos optimizadas, análisis de seguridad y protección contra vulnerabilidades.</p>
+                    <p>Programación Web & Seguridad</p>
+                    <p>Creamos tu página web con animaciones, diseños CSS modernos, bases de datos y automatización. Incluye panel de administración para que controles todo fácilmente.</p>
                 </div>
                 <div class="team-member">
                     <img src="img/google ads.jpg" alt="Marketing Digital">
                     <h3>Marketing Digital</h3>
                     <p>Publicidad & Campañas Online</p>
-                    <p>Facebook Ads, Instagram Ads, Google Ads y YouTube Ads para alcanzar más clientes.</p>
+                    <p>Facebook Ads, Instagram Ads, Google Ads y YouTube Ads. Lo implementamos directo en tu web o app para alcanzar más clientes.</p>
                 </div>
             </div>
         </div>
@@ -907,12 +1376,32 @@
         <div class="container">
             <h2>Lo Que Dicen Nuestros Clientes</h2>
             <div class="testimonial-item">
-                <p>"High Cloud 8 transformó nuestro sitio web en una máquina generadora de leads. Su equipo fue profesional y los resultados hablan por sí solos."</p>
-                <p>CEO, Communik</p>
+                <p>"Contraté a High Cloud 8 para crear el logo y la página web de mi negocio. Quedé muy satisfecho con el resultado, todo muy profesional y a buen precio."</p>
+                <p>Carlos Mendoza, Dueño de <span class="business-name">Ferretería El Martillo</span></p>
             </div>
             <div class="testimonial-item">
-                <p>"Desde el concepto hasta el lanzamiento, el equipo de High Cloud 8 estuvo con nosotros en cada paso. Nuestro nuevo sitio se ve increíble y es muy fácil de administrar."</p>
-                <p>Fundador, iHighCloud8®</p>
+                <p>"Me ayudaron a hacer publicidad en Facebook y Google para mi restaurante. En dos semanas ya tenía más clientes llamando. Muy recomendados."</p>
+                <p>Ana García, Propietaria de <span class="business-name">Restaurante La Cocina</span></p>
+            </div>
+            
+            <!-- Review Form -->
+            <div class="review-form-container">
+                <h3>Deja Tu Opinión</h3>
+                <form action="pages/send_review.php" method="POST" class="review-form">
+                    <div class="form-group">
+                        <label for="review-name">Nombre:</label>
+                        <input type="text" id="review-name" name="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="review-business">Negocio/Empresa:</label>
+                        <input type="text" id="review-business" name="business" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="review-message">Tu Opinión:</label>
+                        <textarea id="review-message" name="review" class="form-control" rows="4" placeholder="Cuéntanos tu experiencia con nosotros..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar Opinión</button>
+                </form>
             </div>
         </div>
     </section>
