@@ -1,0 +1,24 @@
+{
+  "name": "High Cloud 8",
+  "short_name": "HC8",
+  "description": "Diseño y Desarrollo Web Profesional",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b0b12",
+  "theme_color": "#196eee",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "img/highcloud8-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "img/highcloud8-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
