@@ -29,18 +29,27 @@
 </head>
 <body>
 
-  <!-- Header con logo y navegación -->
+  <!-- Header con logo y navegación (igual que index) -->
   <header class="header">
     <a href="../index.html" class="logo">
       <img src="../img/highcloud8.png" alt="High Cloud 8 Logo" class="logo-img" />
+      <span class="logo-text">High Cloud 8</span>
     </a>
+
+    <div class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
     <nav class="navbar">
-      <a href="../index.html" class="nav-link">Home</a>
-      <a href="../index.html#about" class="nav-link">About</a>
-      <a href="../index.html#services" class="nav-link">Services</a>
-      <a href="../index.html#team" class="nav-link">Our Team</a>
-      <a href="../index.html#testimonials" class="nav-link">Testimonials</a>
-      <a href="../index.html#contact" class="nav-link">Contact</a>
+      <a href="../index.html" class="nav-link">Inicio</a>
+      <a href="../index.html#contact" class="nav-link">Formulario</a>
+      <a href="../index.html#about" class="nav-link">Acerca de</a>
+      <a href="../index.html#services" class="nav-link">Servicios</a>
+      <a href="../index.html#team" class="nav-link">Especialidades</a>
+      <a href="../index.html#testimonials" class="nav-link">Testimonios</a>
+      <a href="../index.html#contact-us" class="nav-link">Contacto</a>
     </nav>
   </header>
 
@@ -49,13 +58,33 @@
   <main id="formulario-proyecto">
     <form id="clienteForm" enctype="multipart/form-data">
       <h1>Cuéntanos Tu Visión De Diseño</h1>
-      <p>Este formulario es tu espacio para expresar cómo deseas que se vea y funcione tu página web. Mientras más detalles nos brindes, mejor podremos traducir tu visión en un diseño profesional, moderno y atractivo.</p>
+      <p class="intro-text">Este formulario es para crear tu Web App. Con tus respuestas la diseñamos y en pocos días la dejamos lista y publicada con tu dominio. Cuéntanos todo lo que puedas: colores, estilo, ejemplos. Así la entregamos rápido y tal como la quieres.</p>
 
       <section>
         <h2>1. Identidad de tu marca</h2>
         <label>Nombre de tu pagina web:
           <input type="text" name="nombre_proyecto" required>
         </label>
+
+        <label>Dominio preferido:
+          <input type="text" name="dominio_preferido" placeholder="Ej: www.minombre.com">
+        </label>
+
+        <label>Extensión que prefieres para buscar disponibilidad:</label>
+        <div>
+          <input type="radio" name="dominio_extension" value=".com" checked> .com<br>
+          <input type="radio" name="dominio_extension" value=".net"> .net<br>
+          <input type="radio" name="dominio_extension" value=".co"> .co<br>
+          <input type="radio" name="dominio_extension" value=".store"> .store<br>
+          <input type="radio" name="dominio_extension" value=".shop"> .shop<br>
+          <input type="radio" name="dominio_extension" value="otro"> Cualquiera (la que esté libre)<br>
+        </div>
+
+        <label>Segundo nombre si no está disponible el dominio principal:
+          <textarea name="dominio_alternativo" placeholder="Ej: mipaginaonline.com, tiendaacme.net"></textarea>
+        </label>
+
+        <p style="font-size:0.95rem; margin-top:4px; color:#555;">Buscaremos disponibilidad con estas opciones y usaremos la mejor que esté libre.</p>
 
         <label>Describe tu marca o lo que deseas reflejar con tu diseño:
           <textarea name="descripcion_negocio" required></textarea>
@@ -122,9 +151,10 @@
           <label>Sube tu logo:</label>
           <input type="file" name="logo" id="logoInput" accept="image/*" onchange="previewLogo(event)">
           <div id="logoPreview" class="file-preview"></div>
+        </div>
 
-        <label>Comparte links o ejemplos de páginas que te gusten visualmente:
-          <textarea name="referencias_visuales"></textarea>
+        <label>Comparte alguna página o aplicación que te guste y qué te gusta de ella:
+          <textarea name="referencias_visuales" placeholder="Ej: https://bestbuy.com (me gusta la portada) o app Shein (me gusta la navegación)"></textarea>
         </label>
       </section>
 
@@ -205,6 +235,65 @@
         </div>
       </section>
 
+      <section>
+        <h2>8. Llamados a la acción y metas</h2>
+        <label>¿Qué acciones clave quieres que hagan los usuarios?</label>
+        <div>
+          <input type="checkbox" name="cta[]" value="contactar"> Enviar formulario de contacto<br>
+          <input type="checkbox" name="cta[]" value="agendar"> Agregar cita o booking<br>
+          <input type="checkbox" name="cta[]" value="comprar"> Comprar o suscribirse<br>
+          <input type="checkbox" name="cta[]" value="descargar"> Descargar un recurso (ebook, audio o video)<br>
+          <input type="checkbox" name="cta[]" value="seguir"> Seguir en redes sociales<br>
+          <input type="checkbox" name="cta[]" value="llamar"> Llamar o escribir por WhatsApp<br>
+        </div>
+        <label>¿Hay ofertas o garantías que deban resaltarse?
+          <textarea name="ofertas_destacadas" placeholder="Ej: Garantía 30 días, envíos gratis, soporte 24/7 (suelen cambiar constantemente)"></textarea>
+        </label>
+      </section>
+
+      <section>
+        <h2>9. Integraciones externas (básicas)</h2>
+        <label>Elige lo que necesitas, sin tecnicismos:</label>
+        <div>
+          <input type="checkbox" name="integraciones[]" value="whatsapp"> Botón de WhatsApp o chat rápido<br>
+          <input type="checkbox" name="integraciones[]" value="telefono"> Botón de llamada directa<br>
+          <input type="checkbox" name="integraciones[]" value="email_simple"> Formularios que lleguen a tu correo<br>
+          <input type="checkbox" name="integraciones[]" value="maps"> Mapa con ubicación de tu negocio<br>
+          <input type="checkbox" name="integraciones[]" value="redes"> Enlaces a redes sociales<br>
+          <input type="checkbox" name="integraciones[]" value="citas"> Agenda de citas o reservas sencilla<br>
+          <input type="checkbox" name="integraciones[]" value="pagos_basicos"> Botón de pago simple (PayPal / tarjeta débito-crédito)<br>
+          <input type="checkbox" name="integraciones[]" value="otros"> Otros (especifica abajo)<br>
+        </div>
+        <label>Cuéntanos si necesitas algo más:
+          <textarea name="integraciones_extra" placeholder="Ej: enviar leads a Excel, enlace a catálogo, etc."></textarea>
+        </label>
+      </section>
+
+      <section>
+        <h2>10. Plazos y contacto</h2>
+        <label>Fecha ideal de lanzamiento:
+          <input type="date" name="fecha_lanzamiento">
+        </label>
+
+        <label>Prioridad del proyecto:
+          <select name="prioridad">
+            <option value="normal">Normal</option>
+            <option value="alta">Alta</option>
+            <option value="urgente">Urgente</option>
+          </select>
+        </label>
+
+        <label>Datos de contacto principal:
+          <input type="text" name="contacto_nombre" placeholder="Nombre y apellido">
+          <input type="tel" name="contacto_telefono" placeholder="Teléfono o WhatsApp">
+          <input type="email" name="contacto_email" placeholder="Correo">
+        </label>
+
+        <label>Notas finales o requisitos adicionales:
+          <textarea name="notas_finales" placeholder="Cualquier detalle adicional que necesitemos saber"></textarea>
+        </label>
+      </section>
+
 
   
 
@@ -214,8 +303,64 @@
   </main>
 
 
+  <!-- Footer futurista -->
+    <section id="highcloud8-footer" style="width:100%; min-height:280px; display:flex; justify-content:center; align-items:center; text-align:center; font-family:Arial, sans-serif; color:#e6e6e6; background:rgba(11,11,18,0.85); position:relative; overflow:hidden; padding:30px 20px; margin:0; border-top:2px solid rgba(25,110,238,0.3); box-shadow: 0 -8px 32px rgba(25,110,238,0.15);">
+      <canvas id="highcloud8FooterCanvas" style="position:absolute; top:0; left:0; width:100%; background:rgba(11,11,18,0.85);height:100%; z-index:0;"></canvas>
+      <div class="footer container" style="position:relative; z-index:1; width:100%; max-width:900px; margin:0 auto; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:1.5rem 1rem; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.03)); border-radius: 12px; border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 8px 20px rgba(25,110,238,.2);">
+          <a href="https://www.instagram.com/highcloud8/" target="_blank" rel="noopener noreferrer" style="text-decoration:none; display:flex; flex-direction:column; align-items:center; justify-content:center; margin-bottom:12px; gap:8px;">
+              <img src="../img/highcloud8-2.PNG" alt="High Cloud8 Logo" class="highcloud8-logo" style="height:120px; max-width:220px; width:auto; margin:0 0 12px 0; animation: pulse 2s infinite; border-radius:10px; object-fit:contain;">
+              <span style="font-size:32px; font-weight:bold; letter-spacing:0.5px; color:#196eee; text-shadow:0 0 8px #196eee, 0 0 2px #000; position:relative; display:flex; flex-direction:column; align-items:center; gap:15px;">
+                  <span>High Cloud 8</span>
+                  <span style="font-size:0.55em; font-weight:500; color:#8e8e8e; background:rgba(25,110,238,0.08); border-radius:8px; padding:15px 20px; box-shadow:0 0 10px rgba(25, 110, 238, 0.4); display:inline-flex; align-items:center; justify-content:center; gap:15px; transition: all 0.3s;">
+                      <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <defs>
+                              <linearGradient id="instagramGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+                                  <stop offset="0%" style="stop-color:#f09433;stop-opacity:1" />
+                                  <stop offset="25%" style="stop-color:#e6683c;stop-opacity:1" />
+                                  <stop offset="50%" style="stop-color:#dc2743;stop-opacity:1" />
+                                  <stop offset="75%" style="stop-color:#cc2366;stop-opacity:1" />
+                                  <stop offset="100%" style="stop-color:#bc1888;stop-opacity:1" />
+                              </linearGradient>
+                          </defs>
+                          <rect x="2" y="2" width="20" height="20" rx="5" stroke="url(#instagramGradient)" stroke-width="2.5"/>
+                          <circle cx="12" cy="12" r="4" stroke="url(#instagramGradient)" stroke-width="2.5"/>
+                          <circle cx="18.5" cy="5.5" r="1.5" fill="url(#instagramGradient)"/>
+                      </svg>
+                      <span style="font-size:1.8em; font-weight:600; color:#fff;">Instagram</span>
+                  </span>
+              </span>
+          </a>
+            <p style="margin-top:8px; font-size:18px; font-weight:600; color:#cfd7ff; text-shadow:0 0 6px rgba(25,110,238,0.6); letter-spacing:0.1px;">
+              Diseño y Desarrollo de Web Apps 
+          </p>
+            <p style="margin-top:8px; font-size:16px; font-weight:500; color:#a9b3d8; text-shadow:0 0 3px rgba(25,110,238,0.5);">© 2025 High Cloud 8. Todos los derechos reservados. <span style="font-weight:bold;">®</span></p>
+      </div>
+  </section>
+
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const hamburger = document.querySelector('.hamburger');
+    const navbar = document.querySelector('.navbar');
+    const navLinks = document.querySelectorAll('.nav-link');
+    if (hamburger && navbar) {
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navbar.classList.toggle('active');
+      });
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          hamburger.classList.remove('active');
+          navbar.classList.remove('active');
+        });
+      });
+      document.addEventListener('click', (e) => {
+        if (!hamburger.contains(e.target) && !navbar.contains(e.target)) {
+          hamburger.classList.remove('active');
+          navbar.classList.remove('active');
+        }
+      });
+    }
   </script>
 
 </body>
