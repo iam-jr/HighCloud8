@@ -2,68 +2,257 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Pago | High Cloud 8</title>
   <link rel="stylesheet" href="../css/styles.css"/>
-    <link rel="stylesheet" href="../css/pagos.css">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <main id="main" style="margin-top: 340px;">
-      <script defer src="../js/pagos-script.js"></script>
-<title>Pago | High Cloud 8</title>
+  <link rel="stylesheet" href="../css/formulario.css"/>
+  <link rel="stylesheet" href="../css/pagos.css">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <script defer src="../js/script.js"></script>
 </head>
 
 <body>
   <header class="header" role="banner">
+    <a href="../index.html" class="logo">
+      <img src="../img/highcloud8.png" alt="High Cloud 8 Logo" class="logo-img" />
+      <span class="logo-text">High Cloud 8</span>
+    </a>
+
+    <div class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
 
     <nav class="navbar" role="navigation" aria-label="Menú principal">
-      <a href="#" class="nav-link active" aria-current="page">Home</a>
-      <a href="#about" class="nav-link">About</a>
-      <a href="#services" class="nav-link">Services</a>
-      <a href="#team" class="nav-link">Our Team</a>
-      <a href="#testimonials" class="nav-link">Testimonials</a>
-      <a href="#contact" class="nav-link">Contact</a>
+      <a href="../index.html" class="nav-link">Inicio</a>
+      <a href="../index.html#contact" class="nav-link">Formulario</a>
+      <a href="../index.html#about" class="nav-link">Acerca de</a>
+      <a href="../index.html#services" class="nav-link">Servicios</a>
+      <a href="../index.html#team" class="nav-link">Especialidades</a>
+      <a href="../index.html#testimonials" class="nav-link">Testimonios</a>
+      <a href="../index.html#contact-us" class="nav-link">Contacto</a>
     </nav>
   </header>
 
-  <main role="main" aria-labelledby="page-title">
-    <h2 id="page-title">Pago obligatorio</h2>
-    <p>Debe completar ambos pagos para continuar.</p>
+  <main role="main" aria-labelledby="page-title" class="payment-container">
+    <div class="payment-card">
+      <h1 id="page-title">Pagos</h1>
+      <p class="intro-text">Completa uno de estos pagos para completar tu Web App. Si prefieres solo el plan básico, está disponible sin suscripción mensual.</p>
 
-    <img src="../img/HighCloud8Prices.png" alt="Precios de High Cloud 8" class="pricing-img" />
+      <div class="price-banner grid-2">
+        <div class="price-tile">
+          <span class="badge-basic">Plan Básico</span>
+          <span class="price-basic">Pago único $289 - $599</span>
+          <span class="note-basic">Entrega de código (sin dominio/hosting/soporte)</span>
+        </div>
+        <div class="price-tile">
+          <span class="badge-sub">Suscripción</span>
+          <span class="price-sub">Pago mensual $50 - $120/mes</span>
+          <span class="note-sub">Incluye dominio, hosting, soporte y mantenimiento</span>
+        </div>
+      </div>
 
-<div class="plan-basico-box">
-  <h3>¿Prefieres solo el Plan Básico?</h3>
-  <p>Haz clic para comprar sin suscripción mensual.</p>
+      <div class="plan-highlight" aria-label="Resumen de planes">
+        <div class="plan-card">
+          <h4>Plan Básico</h4>
+          <p class="price-tag">Pago único $289 - $599</p>
+          <ul>
+            <li>Diseño completo (UI/UX) listo para lanzar.</li>
+            <li>Frontend y backend terminados.</li>
+            <li>Entrega de código/archivos por email, Dropbox o USB.</li>
+            <li>Documentación básica para instalar y desplegar.</li>
+            <li>No incluye dominio, hosting, mantenimiento ni soporte.</li>
+            <li>Ideal si ya tienes hosting, dominio o equipo técnico propio.</li>
+          </ul>
+        </div>
+        <div class="plan-card featured">
+          <h4>Suscripción</h4>
+          <p class="price-tag">$50 - $120/mes</p>
+          <ul>
+            <li>Diseño completo incluido.</li>
+            <li>Dominio, hosting y base de datos incluidos.</li>
+            <li>Soporte continuo, parches y mantenimiento activo.</li>
+            <li>Analítica: tráfico, información de usuarios, páginas vistas y clics.</li>
+            <li>Actualizaciones, optimizaciones y ajustes recurrentes.</li>
+            <li>Listo para producción sin que te ocupes de lo técnico.</li>
+          </ul>
+        </div>
+      </div>
 
-  <form action="https://www.paypal.com/ncp/payment/497F5HYDKV3XQ" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
-    <input class="pp-497F5HYDKV3XQ" type="submit" value="Plan Básico" />
-    <img src="https://www.paypalobjects.com/images/Debit_Credit_APM.svg" alt="cards" />
-    <section style="font-size: 0.75rem;">
-      Powered by 
-      <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;" />
-    </section>
-  </form>
-</div>
+      <section class="card-pay" aria-labelledby="card-pay-title">
+        <div class="card-pay-header">
+          <div class="method-label">Método 1: Tarjeta en esta página</div>
+          <h3 id="card-pay-title">Paga aquí con tarjeta (sin salir)</h3>
+          <p>Elige plan y monto, ingresa tu tarjeta y completa el pago en esta misma página.</p>
+        </div>
+        <div class="card-plan-select">
+          <label class="plan-option">
+            <input type="radio" name="cardPlan" value="basico" checked>
+            <div>
+              <strong>Plan Básico</strong>
+              <small>Pago único (código entregado)</small>
+            </div>
+          </label>
+          <label class="plan-option">
+            <input type="radio" name="cardPlan" value="suscripcion">
+            <div>
+              <strong>Suscripción</strong>
+              <small>Mensual, incluye dominio/hosting/soporte</small>
+            </div>
+          </label>
+        </div>
 
+        <div class="amount-selectors">
+          <div class="amount-group" data-plan="basico">
+            <label>Plan Básico (Pago Único)</label>
+            <select id="amount-basico">
+              <option value="289">$289</option>
+            </select>
+          </div>
+          <div class="amount-group" data-plan="suscripcion" style="display:none;">
+            <label>Pago Mensual (Suscripción)</label>
+            <select id="amount-suscripcion">
+              <option value="50">$50/mes</option>
+            </select>
+          </div>
+        </div>
 
-  <section aria-labelledby="suscripcion-title" class="suscripcion-box">
-  <h3 id="suscripcion-title">Suscripción mensual ($119/mes + $199/Activación)</h3>
-  <div id="paypal-suscripcion" class="paypal-box disabled"></div>
-</section>
+        <div id="card-fields" class="card-fields">
+          <label>Número de tarjeta</label>
+          <div id="card-number" class="card-field"></div>
+          <label>Vencimiento</label>
+          <div id="card-expiry" class="card-field"></div>
+          <label>Código de seguridad</label>
+          <div id="card-cvv" class="card-field"></div>
+        </div>
 
-<div class="disclosure-box" style="margin-top: 1rem; font-size: 0.85rem;">
-  <label>
-    <input type="checkbox" id="disclosureCheck" required />
-    He leído y acepto que este pago corresponde a servicios digitales proporcionados por <strong>High Cloud 8</strong>, incluyendo diseño web y desarrollo de software basado en la nube. Entiendo que este pago es <strong>no reembolsable</strong> y que al continuar autorizo a High Cloud 8 a procesar el pago según las condiciones establecidas.
-  </label>
-</div>
+        <div class="trust-note">
+          Pago seguro procesado por PayPal. No guardamos tu tarjeta. Conexión cifrada (SSL) y verificación 3D Secure cuando aplica.
+        </div>
 
+        <div class="card-actions">
+          <button id="card-submit" class="btn btn-primary" disabled>Pagar ahora</button>
+          <div id="card-status" class="card-status" aria-live="polite"></div>
+        </div>
 
-<div class="submit-box">
-  <button id="submitBtn" disabled aria-disabled="true">Enviar Formulario</button>
-</div>
+        <div id="paypal-card-fallback" class="paypal-fallback" style="display:none;">
+          <p>Si no ves el formulario de tarjeta, puedes pagar con PayPal aquí mismo:</p>
+          <div id="paypal-card-buttons"></div>
+        </div>
+      </section>
 
+      <div class="plan-basico-box">
+        <h3>¿Prefieres solo el Plan Básico?</h3>
+        <p>Compra única, sin suscripción mensual.</p>
 
-  <!-- SDK de PayPal -->
-  <script src="https://www.paypal.com/sdk/js?client-id=AXEcXn7TJDcigKv90GQ_PFH4ZPO_a1lX8okIkuVx8SLhe4hZ2e6A6guHxeVDJELrV_dKMhovIl-WP60A&vault=true&intent=subscription&currency=USD"></script>
+        <form action="https://www.paypal.com/ncp/payment/497F5HYDKV3XQ" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
+          <input class="pp-497F5HYDKV3XQ" type="submit" value="Plan Básico" />
+          <img src="https://www.paypalobjects.com/images/Debit_Credit_APM.svg" alt="cards" />
+          <section style="font-size: 0.75rem;">
+            Powered by 
+            <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;" />
+          </section>
+        </form>
+      </div>
+
+      <section aria-labelledby="suscripcion-title" class="suscripcion-box">
+        <div class="method-label" style="margin-bottom:8px;">Método 2: PayPal rápido</div>
+        <h3 id="suscripcion-title">Suscripción mensual ($50 a $120/mes) + Activación <span style="text-decoration:line-through; color:#e74c3c; font-weight:800; font-size:1.05em;">$199</span> <span style="color:#00b894; font-weight:800;">$0</span></h3>
+        <p style="margin:6px 0 0; color:#00b894; font-weight:600;">Oferta: activación gratis por tiempo limitado.</p>
+        <div id="paypal-suscripcion" class="paypal-box disabled"></div>
+      </section>
+
+      <div class="info-box" aria-labelledby="que-incluye-title">
+        <h4 id="que-incluye-title">Qué estás pagando y por qué</h4>
+        <p><strong>Opción 1 - Plan Básico (pago único):</strong> diseño + frontend + backend entregados como archivos/código (email, Dropbox o USB). No incluye dominio, hosting, soporte ni mantenimiento.</p>
+        <p><strong>Opción 2 - Suscripción mensual:</strong> $50 a $120/mes según el alcance (tienda, reservas, chat, etc.). Incluye operación en línea y soporte continuo.</p>
+        <p><strong>Activación:</strong> <span style="text-decoration:line-through; color:#e74c3c; font-weight:700;">$199</span> ahora <strong style="color:#00b894;">$0</strong> en oferta.</p>
+        <ul class="info-list">
+          <li>Dominio (.com, .net o similar) gestionado por nosotros.</li>
+          <li>Hosting y base de datos para tu Web App.</li>
+          <li>Configuración de analítica (tráfico, información de usuarios, páginas vistas y clics).</li>
+          <li>Mantenimiento técnico, parches y actualizaciones.</li>
+          <li>Soporte continuo y ajustes menores.</li>
+        </ul>
+        <p class="note">Definimos el monto mensual final contigo según las funcionalidades seleccionadas antes de activar el cobro.</p>
+      </div>
+
+      <div class="disclosure-box">
+        <label>
+          <input type="checkbox" id="disclosureCheck" required />
+          He leído y acepto que este pago corresponde a servicios digitales proporcionados por <strong>High Cloud 8</strong>, incluyendo diseño web y desarrollo de software basado en la nube. Entiendo que este pago es <strong>no reembolsable</strong> y que al continuar autorizo a High Cloud 8 a procesar el pago según las condiciones establecidas.
+        </label>
+      </div>
+
+      <div class="submit-box">
+        <button id="submitBtn" disabled aria-disabled="true">Continuar</button>
+      </div>
+    </div>
+  </main>
+
+  <section id="highcloud8-footer" style="width:100%; min-height:280px; display:flex; justify-content:center; align-items:center; text-align:center; font-family:Arial, sans-serif; color:#e6e6e6; background:rgba(11,11,18,0.85); position:relative; overflow:hidden; padding:30px 20px; margin:0; border-top:2px solid rgba(25,110,238,0.3); box-shadow: 0 -8px 32px rgba(25,110,238,0.15);">
+      <canvas id="highcloud8FooterCanvas" style="position:absolute; top:0; left:0; width:100%; background:rgba(11,11,18,0.85);height:100%; z-index:0;"></canvas>
+      <div class="footer container" style="position:relative; z-index:1; width:100%; max-width:900px; margin:0 auto; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:1.5rem 1rem; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.03)); border-radius: 12px; border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 8px 20px rgba(25,110,238,.2);">
+          <a href="https://www.instagram.com/highcloud8/" target="_blank" rel="noopener noreferrer" style="text-decoration:none; display:flex; flex-direction:column; align-items:center; justify-content:center; margin-bottom:12px; gap:8px;">
+              <img src="../img/highcloud8-2.PNG" alt="High Cloud8 Logo" class="highcloud8-logo" style="height:120px; max-width:220px; width:auto; margin:0 0 12px 0; animation: pulse 2s infinite; border-radius:10px; object-fit:contain;">
+              <span style="font-size:32px; font-weight:bold; letter-spacing:0.5px; color:#196eee; text-shadow:0 0 8px #196eee, 0 0 2px #000; position:relative; display:flex; flex-direction:column; align-items:center; gap:15px;">
+                  <span>High Cloud 8</span>
+                  <span style="font-size:0.55em; font-weight:500; color:#8e8e8e; background:rgba(25,110,238,0.08); border-radius:8px; padding:15px 20px; box-shadow:0 0 10px rgba(25, 110, 238, 0.4); display:inline-flex; align-items:center; justify-content:center; gap:15px; transition: all 0.3s;">
+                      <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <defs>
+                              <linearGradient id="instagramGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+                                  <stop offset="0%" style="stop-color:#f09433;stop-opacity:1" />
+                                  <stop offset="25%" style="stop-color:#e6683c;stop-opacity:1" />
+                                  <stop offset="50%" style="stop-color:#dc2743;stop-opacity:1" />
+                                  <stop offset="75%" style="stop-color:#cc2366;stop-opacity:1" />
+                                  <stop offset="100%" style="stop-color:#bc1888;stop-opacity:1" />
+                              </linearGradient>
+                          </defs>
+                          <rect x="2" y="2" width="20" height="20" rx="5" stroke="url(#instagramGradient)" stroke-width="2.5"/>
+                          <circle cx="12" cy="12" r="4" stroke="url(#instagramGradient)" stroke-width="2.5"/>
+                          <circle cx="18.5" cy="5.5" r="1.5" fill="url(#instagramGradient)"/>
+                      </svg>
+                      <span style="font-size:1.8em; font-weight:600; color:#fff;">Instagram</span>
+                  </span>
+              </span>
+          </a>
+          <p style="margin-top:8px; font-size:18px; font-weight:600; color:#cfd7ff; text-shadow:0 0 6px rgba(25,110,238,0.6); letter-spacing:0.1px;">
+              Diseño y Desarrollo de Web Apps 
+          </p>
+          <p style="margin-top:8px; font-size:16px; font-weight:500; color:#a9b3d8; text-shadow:0 0 3px rgba(25,110,238,0.5);">© 2025 High Cloud 8. Todos los derechos reservados. <span style="font-weight:bold;">®</span></p>
+      </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const hamburger = document.querySelector('.hamburger');
+    const navbar = document.querySelector('.navbar');
+    const navLinks = document.querySelectorAll('.nav-link');
+    if (hamburger && navbar) {
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navbar.classList.toggle('active');
+      });
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          hamburger.classList.remove('active');
+          navbar.classList.remove('active');
+        });
+      });
+      document.addEventListener('click', (e) => {
+        if (!hamburger.contains(e.target) && !navbar.contains(e.target)) {
+          hamburger.classList.remove('active');
+          navbar.classList.remove('active');
+        }
+      });
+    }
+  </script>
+
+  <!-- SDK de PayPal con Hosted Fields -->
+  <script src="https://www.paypal.com/sdk/js?client-id=AXEcXn7TJDcigKv90GQ_PFH4ZPO_a1lX8okIkuVx8SLhe4hZ2e6A6guHxeVDJELrV_dKMhovIl-WP60A&components=buttons,hosted-fields&vault=true&intent=subscription&currency=USD"></script>
+  <script src="../js/pagos-script.js"></script>
 
 </body>
 </html>
